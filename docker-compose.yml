@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: senhadb
+      POSTGRES_DB: "cake_blog"
+      POSTGRES_USER: "postgres"
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+  apache:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: always
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+
+
+volumes:
+  db-data:
+    external: false
