@@ -12,7 +12,7 @@ services:
       POSTGRES_DB: "cake_blog"
       POSTGRES_USER: "postgres"
     volumes:
-      - ./db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
 
   apache:
     build:
@@ -29,4 +29,3 @@ services:
 
 volumes:
   db-data:
-    external: false
