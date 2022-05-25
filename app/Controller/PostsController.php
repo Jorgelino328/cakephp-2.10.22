@@ -14,7 +14,15 @@ class PostsController extends AppController
 
 	public function view($id = null)
 	{
-		$this->set('post', $this->Post->findById($id));
+		if (!$id) {
+			throw new NotFoundException(__('Post inválido'));
+		}
+
+		$post = $this->Post->findById($id);
+		if (!$post) {
+			throw new NotFoundException(__('Post inválido'));
+		}
+		$this->set('post', $post);
 	}
 
 	public function isAuthorized($user)

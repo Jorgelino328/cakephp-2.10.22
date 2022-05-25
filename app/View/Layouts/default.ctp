@@ -20,7 +20,7 @@
 	//It will be present in all your views.
 	//the file has to be present in /app/webroot/js
 	-->
-	<?php echo $this->Html->script('yourscript'); ?>
+	<?php echo $this->Html->script('bootstrap.min'); ?>
 
 </head>
 <body>
@@ -41,6 +41,7 @@
 //the file footer.ctp has to be present in /View/Elements
 -->
 <?php echo $this->element('footer'); ?>
+<?php echo $this->element('sql_dump'); ?>
 
 </body>
 </html>

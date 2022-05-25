@@ -18,7 +18,7 @@
 		<tr>
 			<td><?php echo $post['Post']['id']; ?></td>
 			<td>
-				<?php echo $this->Html->link($post['Post']['title'], array('controller' => 'posts', 'action' => 'index', $post['Post']['id'])); ?>
+				<?php echo $this->Html->link($post['Post']['title'], array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
 			</td>
 			<td>
 				<?php echo $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash-o')),
@@ -32,6 +32,6 @@
 			<td><?php echo $post['Post']['created']; ?></td>
 		</tr>
 	<?php endforeach; ?>
-
+	<?php unset($post); ?>
 </table>
 </div>
