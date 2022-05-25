@@ -7,6 +7,7 @@ class PostsController extends AppController
 	public $helpers = array('Html', 'Form');
 	public $name = 'Posts';
 
+
 	function index()
 	{
 		$this->set('posts', $this->Post->find('all'));
@@ -76,6 +77,11 @@ class PostsController extends AppController
 			$this->Flash->success('The post with id: ' . $id . ' has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
+	}
+
+	function search($key)
+	{
+		$this->set('posts', $this->Post->findAllByTitle($key));
 	}
 
 

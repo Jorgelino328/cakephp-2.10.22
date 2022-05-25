@@ -1,47 +1,70 @@
+<?php
+/**
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
+ * @package       app.View.Layouts
+ * @since         CakePHP(tm) v 0.10.0.1076
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
+ */
+
+$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+?>
+<!DOCTYPE html>
 <html>
 <head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<?php echo $this->Html->charset(); ?>
+	<title>
+		<?php echo $cakeDescription ?>:
+		<?php echo $this->fetch('title'); ?>
+	</title>
+	<?php
+	echo $this->Html->meta('icon');
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
-		  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	echo $this->Html->css('cake.generic');
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-			crossorigin="anonymous"></script>
-	<!--Icons-->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!--
-	//here your javascript yourscript.js
-	//It will be present in all your views.
-	//the file has to be present in /app/webroot/js
-	-->
-	<?php echo $this->Html->script('bootstrap.min'); ?>
-
+	echo $this->fetch('meta');
+	echo $this->fetch('css');
+	echo $this->fetch('script');
+	?>
 </head>
 <body>
 
-<!--
-//header
-//the file header.ctp has to be present in /View/Elements
--->
-<?php echo $this->element('header'); ?>
+<div id="container">
+	<div id="header" , style="float:left;">
+		<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?></h1>
+		<?php echo $this->Form->create('search'); ?>
+		<?php echo $this->Form->input(
+				'key',
+				array('type' => 'hidden', 'value' => $key)
+		); ?>
+		<?php echo $this->Form->end('Buscar'); ?>
+	</div>
+	<div id="content">
 
-<!--
-//here the content, for example from /View/Posts/edit.ctp
--->
-<?php echo $this->fetch('content'); ?>
+		<?php echo $this->Flash->render(); ?>
 
-<!--
-//footer
-//the file footer.ctp has to be present in /View/Elements
--->
-<?php echo $this->element('footer'); ?>
+		<?php echo $this->fetch('content'); ?>
+	</div>
+	<div id="footer">
+		<?php echo $this->Html->link(
+				$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
+				'https://cakephp.org/',
+				array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
+		);
+		?>
+		<p>
+			<?php echo $cakeVersion; ?>
+		</p>
+	</div>
+</div>
 <?php echo $this->element('sql_dump'); ?>
-
 </body>
 </html>

@@ -19,7 +19,7 @@ class UsersController extends AppController
 			if ($this->Auth->login()) {
 				return $this->redirect($this->Auth->redirectUrl());
 			}
-			$this->Flash->error(__('Seu nome de usuário e/ou senha estão incorretos!'));
+			$this->Flash->error(__('Invalid username or password, try again'));
 		}
 	}
 
@@ -48,11 +48,11 @@ class UsersController extends AppController
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Flash->success(__('Usuário registrado com sucesso!'));
+				$this->Flash->success(__('The user has been saved'));
 				return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
 			}
 			$this->Flash->error(
-				__('O Usuário não pôde ser registrado! Por favor tente novamente.')
+				__('The user could not be saved. Please, try again.')
 			);
 		}
 	}
@@ -95,6 +95,5 @@ class UsersController extends AppController
 		$this->Flash->error(__('User was not deleted'));
 		return $this->redirect(array('action' => 'index'));
 	}
-	
 
 }
