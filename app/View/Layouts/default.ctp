@@ -43,6 +43,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index', 'method' => 'get')); ?>
 		<?php echo $this->Form->input('key', array('label' => false)); ?>
 		<?php echo $this->Form->end('Buscar'); ?>
+
+		<?php if ($this->Session->read('Auth.User')) {
+			echo $this->Html->link("logout", array('controller' => 'users', 'action' => 'logout'));
+		} else {
+			echo $this->Html->link("login", array('controller' => 'users', 'action' => 'login'));
+		} ?>
 	</div>
 	<div id="content">
 

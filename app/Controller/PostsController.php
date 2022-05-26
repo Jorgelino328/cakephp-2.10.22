@@ -84,5 +84,4 @@ class PostsController extends AppController
 		}
 	}
 
-
 }

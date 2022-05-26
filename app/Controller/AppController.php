@@ -33,6 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller
 {
 
+
 	public $components = array(
 		'Flash',
 		'Auth' => array(
@@ -41,8 +42,8 @@ class AppController extends Controller
 				'action' => 'index'
 			),
 			'logoutRedirect' => array(
-				'controller' => 'pages',
-				'action' => 'display',
+				'controller' => 'posts',
+				'action' => 'index',
 				'home'
 			),
 			'authenticate' => array(
@@ -67,7 +68,9 @@ class AppController extends Controller
 			return true;
 		}
 
+
 		// Default deny
 		return false;
 	}
+
 }
