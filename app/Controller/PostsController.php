@@ -39,7 +39,7 @@ class PostsController extends AppController
 		}
 
 		// The owner of a post can edit and delete it
-		if (in_array($this->action, array('edit', 'delete'))) {
+		if (in_array($this->action, array('edit', 'delete',))) {
 			$postId = (int)$this->request->params['pass'][0];
 			if ($this->Post->isOwnedBy($postId, $user['id'])) {
 				return true;
