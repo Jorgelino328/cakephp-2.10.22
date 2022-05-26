@@ -48,6 +48,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			echo $this->Html->link("logout", array('controller' => 'users', 'action' => 'logout'));
 		} else {
 			echo $this->Html->link("login", array('controller' => 'users', 'action' => 'login'));
+			echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));
 		} ?>
 	</div>
 	<div id="content">
