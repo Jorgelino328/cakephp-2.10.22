@@ -40,11 +40,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <div id="container">
 	<div id="header" , style="float:left;">
 		<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?></h1>
-		<?php echo $this->Form->create('search'); ?>
-		<?php echo $this->Form->input(
-				'key',
-				array('type' => 'hidden', 'value' => $key)
-		); ?>
+		<?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index', 'method' => 'get')); ?>
+		<?php echo $this->Form->input('key', array('label' => false)); ?>
 		<?php echo $this->Form->end('Buscar'); ?>
 	</div>
 	<div id="content">

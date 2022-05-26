@@ -10,7 +10,12 @@ class PostsController extends AppController
 
 	function index()
 	{
-		$this->set('posts', $this->Post->find('all'));
+		if (empty($this->request->data)) {
+			$this->set('posts', $this->Post->query("SELECT * FROM posts "));
+		} else {
+			$key = $this->request->data['Search']['key'];
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
+		}
 	}
 
 	public function view($id = null)
@@ -77,11 +82,6 @@ class PostsController extends AppController
 			$this->Flash->success('The post with id: ' . $id . ' has been deleted.');
 			$this->redirect(array('action' => 'index'));
 		}
-	}
-
-	function search($key)
-	{
-		$this->set('posts', $this->Post->findAllByTitle($key));
 	}
 
 

@@ -1,10 +1,4 @@
 <!-- File: /app/View/Posts/index.ctp -->
-<?php echo $this->Form->create('search'); ?>
-<?php echo $this->Form->input(
-		'key',
-		array('type' => 'hidden', 'value' => $key)
-); ?>
-<?php echo $this->Form->end('Buscar'); ?>
 <h1>Blog posts</h1>
 <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
 <table>
@@ -17,22 +11,21 @@
 
 	<!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
 	as informações dos posts -->
-
 	<?php foreach ($posts as $post): ?>
 		<tr>
-			<td><?php echo $post['Post']['id']; ?></td>
+			<td><?php echo $post[0]['id']; ?></td>
 			<td>
-				<?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
+				<?php echo $this->Html->link($post[0]['title'], array('action' => 'view', $post[0]['id'])); ?>
 			</td>
 			<td>
 				<?php echo $this->Form->postLink(
 						'Delete',
-						array('action' => 'delete', $post['Post']['id']),
+						array('action' => 'delete', $post[0]['id']),
 						array('confirm' => 'Are you sure?')
 				) ?>
-				<?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
+				<?php echo $this->Html->link('Edit', array('action' => 'edit', $post[0]['id'])); ?>
 			</td>
-			<td><?php echo $post['Post']['created']; ?></td>
+			<td><?php echo $post[0]['created']; ?></td>
 		</tr>
 	<?php endforeach; ?>
 
