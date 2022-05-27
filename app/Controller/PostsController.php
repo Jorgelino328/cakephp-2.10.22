@@ -39,7 +39,7 @@ class PostsController extends AppController
 		}
 
 		// The owner of a post can edit and delete it
-		if (in_array($this->action, array('edit', 'delete',))) {
+		if (in_array($this->action, array('edit', 'delete', 'index'))) {
 			$postId = (int)$this->request->params['pass'][0];
 			if ($this->Post->isOwnedBy($postId, $user['id'])) {
 				return true;
@@ -81,6 +81,13 @@ class PostsController extends AppController
 		if ($this->Post->delete($id)) {
 			$this->Flash->success('The post with id: ' . $id . ' has been deleted.');
 			$this->redirect(array('action' => 'index'));
+		}
+	}
+
+	function isVisible($postId)
+	{
+		if ($postId == $this->Auth->user('id')) {
+			return true;
 		}
 	}
 
