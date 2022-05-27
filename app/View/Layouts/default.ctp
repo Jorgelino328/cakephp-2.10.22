@@ -28,8 +28,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php
 	echo $this->Html->meta('icon');
 
-	echo $this->Html->css('cake.generic');
-
+	echo $this->Html->css('bootstrap.min.css');
+	echo $this->Html->script('bootstrap.min.js');
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
 	echo $this->fetch('script');
@@ -38,18 +38,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 
 <div id="container">
-	<div id="header" , style="float:left;">
-		<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?></h1>
-		<?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index', 'method' => 'get')); ?>
-		<?php echo $this->Form->input('key', array('label' => false)); ?>
-		<?php echo $this->Form->end('Buscar'); ?>
-
-		<?php if ($this->Session->read('Auth.User')) {
-			echo $this->Html->link("logout", array('controller' => 'users', 'action' => 'logout'));
-		} else {
-			echo $this->Html->link("login", array('controller' => 'users', 'action' => 'login'));
-			echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));
-		} ?>
+	<div id="header">
+		<?php echo $this->element('header')?>
 	</div>
 	<div id="content">
 
@@ -58,17 +48,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $this->fetch('content'); ?>
 	</div>
 	<div id="footer">
-		<?php echo $this->Html->link(
-				$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-				'https://cakephp.org/',
-				array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-		);
-		?>
-		<p>
-			<?php echo $cakeVersion; ?>
-		</p>
+		<?php echo $this->element('footer')?>
 	</div>
 </div>
-<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
