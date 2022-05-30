@@ -18,22 +18,22 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
 				<li><?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'index'))?></li>
+
+			<li style="position:absolute;left:21%;top:18%;width:30%;"><?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index','method' => 'get')); ?>
+				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search'), array('div' => false)); ?></li>
+			<li style="position:absolute;right:45.8%;top:18%;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+			<?php echo $this->Form->end();?>
+			</li>
 			</ul>
-			<form class="navbar-form navbar-left">
-				<?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index', 'method' => 'get'),array('type'=>'text','class'=>'form-control', 'placeholder'=>'Search')); ?>
-				<?php echo $this->Form->input('key', array('label' => false)); ?>
-				<?php echo $this->Form->end('Buscar', array( 'class'=>'btn btn-default btn-sm', 'role'=>'button')); ?>
-			</form>
 			<ul class="nav navbar-nav navbar-right">
 
-				<li class="active">
+				<li>
 					<?php if ($this->Session->read('Auth.User')) {
-					echo $this->Html->link("logout", array('controller' => 'users', 'action' => 'logout'), array( 'class'=>'btn btn-default btn-sm', 'role'=>'button'));
-				} else {
-					echo $this->Html->link("login", array('controller' => 'users', 'action' => 'login'), array( 'class'=>'btn btn-default btn-sm', 'role'=>'button'));
-					echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'), array( 'class'=>'btn btn-default btn-sm', 'role'=>'button'));
-					}
-					?>
+					echo $this->Html->link("Logout", array('controller' => 'users', 'action' => 'logout'));
+				} else {?>
+					<li><?php echo $this->Html->link("Login", array('controller' => 'users', 'action' => 'login'));?></li>
+					<li><?php echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));?></li>
+				<?php } ?>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

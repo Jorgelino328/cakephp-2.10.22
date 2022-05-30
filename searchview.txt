@@ -8,3 +8,9 @@
 			echo $this->Html->link("login", array('controller' => 'users', 'action' => 'login'));
 			echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));
 		} ?>
+
+
+				<?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index','method' => 'get')); ?>
+				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search', 'style','div' => false)); ?>
+				<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-search')) . "Buscar", array( 'class'=>'btn btn-default btn-sm', 'role'=>'button','div' => false,'escape' => false)) ?>
+				<?php echo $this->Form->end(); ?>
