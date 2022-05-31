@@ -34,12 +34,12 @@ class PostsController extends AppController
 	public function isAuthorized($user)
 	{
 		// All registered users can add posts
-		if ($this->action === 'add') {
+		if ($this->request->action === 'add') {
 			return true;
 		}
 
 		// The owner of a post can edit and delete it
-		if (in_array($this->action, array('edit', 'delete', 'index'))) {
+		if (in_array($this->request->action, array('edit', 'delete','index'))) {
 			$postId = (int)$this->request->params['pass'][0];
 			if ($this->Post->isOwnedBy($postId, $user['id'])) {
 				return true;
@@ -53,6 +53,8 @@ class PostsController extends AppController
 	{
 		if ($this->request->is('post')) {
 			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
+			$this->request->data['Post_Tag']['post_id'] = $this->request->data['Post']['id'];
+			$this->request->data['Post_Tag']['tag_id'] = $this->request->data['Tag']['id'];
 			if ($this->Post->save($this->request->data)) {
 				$this->Flash->success(__('Your post has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -62,7 +64,6 @@ class PostsController extends AppController
 
 	function edit($id = null)
 	{
-		$this->Post->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Post->findById($id);
 		} else {
@@ -83,12 +84,4 @@ class PostsController extends AppController
 			$this->redirect(array('action' => 'index'));
 		}
 	}
-
-	function isVisible($postId)
-	{
-		if ($postId == $this->Auth->user('id')) {
-			return true;
-		}
-	}
-
 }

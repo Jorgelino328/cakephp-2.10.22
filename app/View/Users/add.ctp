@@ -1,14 +1,27 @@
 <!-- app/View/Users/add.ctp -->
-<div class="users form">
+<div class="container-fluid">
 	<?php echo $this->Form->create('User'); ?>
-	<fieldset>
 		<legend><?php echo __('Add User'); ?></legend>
-		<?php echo $this->Form->input('username', array('label' => 'Usuário: '));
-		echo $this->Form->input('password', array('label' => 'Senha: '));
-		echo $this->Form->input('role', array(
-				'options' => array('admin' => 'Admin', 'author' => 'Author')
-		));
-		?>
-	</fieldset>
-	<?php echo $this->Form->end(__('Submit')); ?>
+		<div class="form-group">
+			<label>Usuário : </label><?php echo $this->Form->input('username', array('label' => false, 'class'=>'form-control'));?>
+		</div>
+		<div class="form-group">
+			<label>Senha : </label><?php echo $this->Form->input('password', array('label' => false,'class'=>'form-control')); ?>
+
+		</div>
+		<div class="form-group">
+			<label for="UserRole">Cargo</label>
+			<select name="data[User][role]" id="UserRole" class="form-control">
+				<option value="">[ Escolher Cargo ]</option>
+				<option value="admin">Admin</option>
+				<option value="author">Author</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit" style=" margin: 0 auto; float: none;">Cadastrar</button>
+			</div>
+			<?php echo $this->Form->end(); ?>
+		</div>
 </div>

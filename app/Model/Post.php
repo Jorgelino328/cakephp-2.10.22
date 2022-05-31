@@ -12,7 +12,13 @@ class Post extends AppModel
 		),
 		'body' => array(
 			'rule' => 'notBlank'
-		)
+		),
+		'tags' => array(
+			'notEmpty' => array(
+				'rule' => array('multiple', array('min' => 1)),
+				'required' => true,
+				'message'  => 'Por favor escolha pelo menos uma tag!'
+			))
 	);
 
 	public function isOwnedBy($post, $user)
