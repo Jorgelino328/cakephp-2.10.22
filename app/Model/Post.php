@@ -6,6 +6,21 @@ class Post extends AppModel
 {
 	public $name = 'Post';
 
+	public $hasAndBelongsToMany =array(
+		'Tag' => array(
+			'className' => 'Tag',
+			'joinTable' => 'posts_tags',
+			'foreignKey' => 'post_id',
+			'associationForeignKey' => 'tag_id'
+		)
+	);
+	public $belongsTo = array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'post_id'
+		)
+	);
+
 	public $validate = array(
 		'title' => array(
 			'rule' => 'notBlank'
