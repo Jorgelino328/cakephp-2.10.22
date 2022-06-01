@@ -22,7 +22,8 @@
 				<?php echo $this->Html->link($post[0]['title'], array('action' => 'view', $post[0]['id'])); ?>
 			</td>
 			<td>
-				<?php if ($post[0]['user_id'] == $this->Session->read('Auth.User.id')) { ?>
+				<?php $user=$this->Session->read('Auth.User');?>
+				<?php if (($post[0]['user_id'] == $user['id'] ) || $user['role'] === 'admin') { ?>
 
 					<?php echo $this->Form->postLink(
 							$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),

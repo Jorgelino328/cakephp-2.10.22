@@ -11,10 +11,10 @@
 	<div class="form-group">
 	<label>Tags:</label>
 			<ul class="ks-cboxtags">
-				<li><input type="checkbox" id="checkboxOne" name="data[Post_Tag][tag_id]" value="acao"><label for="checkboxOne">Ação</label></li>
-				<li><input type="checkbox" id="checkboxTwo" name="data[Post_Tag][tag_id]" value="comedia"><label for="checkboxTwo">Comédia</label></li>
-				<li><input type="checkbox" id="checkboxThree" name="data[Post_Tag][tag_id]" value="drama"><label for="checkboxThree">Drama</label></li>
-				<li><input type="checkbox" id="checkboxFour" name="data[Post_Tag][tag_id]" value="romance"><label for="checkboxFour">Romance</label></li>
+				<li><input type="checkbox" id="checkboxOne" name="data[Post][tag_list]" value="acao"><label for="checkboxOne">Ação</label></li>
+				<li><input type="checkbox" id="checkboxTwo" name="data[Post][tag_list]" value="comedia"><label for="checkboxTwo">Comédia</label></li>
+				<li><input type="checkbox" id="checkboxThree" name="data[Post][tag_list]" value="drama"><label for="checkboxThree">Drama</label></li>
+				<li><input type="checkbox" id="checkboxFour" name="data[Post][tag_list]" value="romance"><label for="checkboxFour">Romance</label></li>
 			</ul>
 	</div>
 	<div class="form-group">

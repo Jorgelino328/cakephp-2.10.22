@@ -28,7 +28,7 @@ class Post extends AppModel
 		'body' => array(
 			'rule' => 'notBlank'
 		),
-		'tags' => array(
+		'tag_list' => array(
 			'notEmpty' => array(
 				'rule' => array('multiple', array('min' => 1)),
 				'required' => true,

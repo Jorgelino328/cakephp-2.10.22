@@ -48,11 +48,11 @@ class UsersController extends AppController
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Flash->success(__('The user has been saved'));
+					$this->Flash->success(__('Usuário salvo com sucesso!'));
 				return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
 			}
 			$this->Flash->error(
-				__('The user could not be saved. Please, try again.')
+				__('O usuário não pôde ser salvo, por favor tente novamente!')
 			);
 		}
 	}
@@ -61,15 +61,15 @@ class UsersController extends AppController
 	{
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid user'));
+			throw new NotFoundException(__('Usuário Inválido'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
-				$this->Flash->success(__('The user has been saved'));
+				$this->Flash->success(__('Usuário salvo com sucesso!'));
 				return $this->redirect(array('action' => 'index'));
 			}
 			$this->Flash->error(
-				__('The user could not be saved. Please, try again.')
+				__('O usuário não pôde ser salvo, por favor tente novamente!')
 			);
 		} else {
 			$this->request->data = $this->User->findById($id);
