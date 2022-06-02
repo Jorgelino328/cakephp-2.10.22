@@ -13,11 +13,10 @@ echo $this->Form->create('Post');?>
 	<div class="form-group">
 		<label>Tags:</label>
 		<ul class="ks-cboxtags">
-			<input type="hidden" name="data[Post][tag_list]"/>
-			<li><input type="checkbox" id="checkboxOne" name="data[Post][tag_list][]" value=1><label for="checkboxOne">Ação</label></li>
-			<li><input type="checkbox" id="checkboxTwo" name="data[Post][tag_list][]" value=2><label for="checkboxTwo">Comédia</label></li>
-			<li><input type="checkbox" id="checkboxThree" name="data[Post][tag_list][]" value=3><label for="checkboxThree">Drama</label></li>
-			<li><input type="checkbox" id="checkboxFour" name="data[Post][tag_list][]" value=4><label for="checkboxFour">Romance</label></li>
+			<input type="hidden" name="data[Post][tags]"/>
+			<?php foreach($tags as $tag){?>
+			<li><input type="checkbox" id='checkboxOne' name="data[Post][tags][]" value=$tag[0]['id'] /><label for="checkboxOne"><?php echo $tag[0]['nome'] ?></label></li>
+			<?php }?>
 		</ul>
 	</div>
 	<div class="form-group">

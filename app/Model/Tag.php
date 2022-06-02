@@ -2,7 +2,7 @@
 
 App::uses('AppModel', 'Model');
 
-class Tag
+class Tag extends AppModel
 {
 	public $name = 'Tag';
 
@@ -12,6 +12,11 @@ class Tag
 			'joinTable' => 'posts_tags',
 			'foreignKey' => 'tag_id',
 			'associationForeignKey' => 'post_id'
+		)
+	);
+	public $validate = array(
+		'nome' => array(
+			'rule' => 'notBlank'
 		)
 	);
 }

@@ -17,6 +17,16 @@ class PostsController extends AppController
 			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
 		}
 	}
+	function myposts()
+	{
+		$user_id=$this->Auth->User('id');
+		if (empty($this->request->data)) {
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE user_id=$user_id"));
+		} else {
+			$key = $this->request->data['Search']['key'];
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND user_id=$user_id"));
+		}
+	}
 
 	public function view($id = null)
 	{
@@ -51,12 +61,13 @@ class PostsController extends AppController
 
 	public function add()
 	{
+		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags "));
 		if ($this->request->is('post')) {
 			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
 			$this->Post->create();
 			if ($this->Post->save($this->request->data)) {
 				$this->Flash->success(__('Post salvo com sucesso!'));
-				$tags_id = $this->request->data['Post']['tag_list'];
+				$tags_id = $this->request->data['Post']['tags'];
 				$post_id = $this->Post->id;
 				foreach ($tags_id as $tag_id){
 					$this->Post->query("INSERT INTO posts_tags (post_id,tag_id) VALUES ($post_id,$tag_id);");
@@ -72,7 +83,13 @@ class PostsController extends AppController
 			$this->request->data = $this->Post->findById($id);
 		} else {
 			if ($this->Post->save($this->request->data)) {
-				$this->Flash->success('Your post has been updated.');
+				$this->Flash->success('Seu post foi atualizado.');
+				$tags_id = $this->request->data['Post']['tag_list'];
+				$post_id = $this->Post->id;
+				$this->Post->query("DELETE FROM posts_tags WHERE post_id=$post_id;");
+				foreach ($tags_id as $tag_id){
+					$this->Post->query("INSERT INTO posts_tags (post_id,tag_id) VALUES ($post_id,$tag_id);");
+				}
 				$this->redirect(array('action' => 'index'));
 			}
 		}
@@ -84,7 +101,7 @@ class PostsController extends AppController
 			throw new MethodNotAllowedException();
 		}
 		if ($this->Post->delete($id)) {
-			$this->Flash->success('The post with id: ' . $id . ' has been deleted.');
+			$this->Flash->success('O post com o id: ' . $id . ' foi deletado.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}

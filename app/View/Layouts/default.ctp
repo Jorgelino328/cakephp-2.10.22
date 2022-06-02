@@ -28,9 +28,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php
 	echo $this->Html->meta('icon');
 
-	echo $this->Html->css('bootstrap.min.css');
+	echo $this->Html->css('bootstrap.min');
+	echo $this->Html->css('bootstrap-theme.min');
 	echo $this->Html->css('tags.css');
-	echo $this->Html->script('bootstrap.min.js');
+
+	echo $this->Html->script('jquery-3.6.0.min');
+	echo $this->Html->script('bootstrap.min');
+
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
 	echo $this->fetch('script');

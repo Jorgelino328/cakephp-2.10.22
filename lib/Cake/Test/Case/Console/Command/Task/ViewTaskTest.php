@@ -292,7 +292,7 @@ class ViewTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->at(0))->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'view.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				$this->stringContains('View Task Articles')
 			);
 
@@ -309,7 +309,7 @@ class ViewTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->at(0))->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'edit.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				new PHPUnit_Framework_Constraint_IsAnything()
 			);
 		$this->Task->bake('edit', true);
@@ -356,7 +356,7 @@ class ViewTaskTest extends CakeTestCase {
 
 		//fake plugin path
 		CakePlugin::load('TestTest', array('path' => APP . 'Plugin' . DS . 'TestTest' . DS));
-		$path = APP . 'Plugin' . DS . 'TestTest' . DS . 'View' . DS . 'ViewTaskComments' . DS . 'view.ctp';
+		$path = APP . 'Plugin' . DS . 'TestTest' . DS . 'View' . DS . 'ViewTaskComments' . DS . 'index.ctp';
 
 		$result = $this->Task->getContent('index');
 		$this->assertNotContains('List Test Test.view Task Articles', $result);
@@ -379,12 +379,12 @@ class ViewTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->at(0))->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'view.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				$this->stringContains('View Task Comments')
 			);
 		$this->Task->expects($this->at(1))->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'edit.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				$this->stringContains('Edit View Task Comment')
 			);
 		$this->Task->expects($this->at(2))->method('createFile')
@@ -473,7 +473,7 @@ class ViewTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->once())->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'view.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				$this->anything()
 			);
 		$this->Task->execute();
@@ -586,7 +586,7 @@ class ViewTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->at(4))->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'view.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				$this->stringContains('ViewTaskComment')
 			);
 
@@ -598,7 +598,7 @@ class ViewTaskTest extends CakeTestCase {
 
 		$this->Task->expects($this->at(6))->method('createFile')
 			->with(
-				TMP . 'ViewTaskComments' . DS . 'edit.ctp',
+				TMP . 'ViewTaskComments' . DS . 'index.ctp',
 				$this->stringContains('Edit View Task Comment')
 			);
 

@@ -2,9 +2,9 @@
 <div class="jumbotron">
 	<div class="panel panel-default">
 		<!-- Default panel contents -->
-		<div class="panel-heading"><h1>Blog posts</h1></div>
+		<div class="panel-heading"><h1>Posts do Blog</h1></div>
 		<div class="panel-body">
-<p><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Add Post", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></p>
+<p><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Post", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></p>
 <table class="table">
 	<tr>
 		<th>Id</th>
@@ -15,15 +15,16 @@
 
 	<!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
 	as informações dos posts -->
+	<?php $user=$this->Session->read('Auth.User');?>
 	<?php foreach ($posts as $post): ?>
+
 		<tr>
 			<td><?php echo $post[0]['id']; ?></td>
 			<td>
 				<?php echo $this->Html->link($post[0]['title'], array('action' => 'view', $post[0]['id'])); ?>
 			</td>
 			<td>
-				<?php $user=$this->Session->read('Auth.User');?>
-				<?php if (($post[0]['user_id'] == $user['id'] ) || $user['role'] === 'admin') { ?>
+				<?php if ($post[0]['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
 
 					<?php echo $this->Form->postLink(
 							$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
@@ -38,6 +39,7 @@
 	<?php endforeach; ?>
 
 </table>
+
 		</div>
 		</div>
 </div>

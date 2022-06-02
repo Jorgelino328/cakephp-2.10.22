@@ -16,39 +16,30 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-				<li><?php echo $this->Html->link('Posts', array('controller' => 'posts', 'action' => 'index'))?></li>
-
-			<li style="position:absolute;left:21%;top:18%;width:30%;"><?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => 'index','method' => 'get')); ?>
+				<li><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'index'))?></li>
+				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'myposts'))?></li>
+				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
+			<li style="position:absolute;left:29%;top:18%;width:30%;"><?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search'), array('div' => false)); ?></li>
-			<li style="position:absolute;right:45.8%;top:18%;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+			<li style="position:absolute;right:37.8%;top:18%;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 			<?php echo $this->Form->end();?>
 			</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-
-				<li>
-					<?php if ($this->Session->read('Auth.User')) {
-					echo $this->Html->link("Logout", array('controller' => 'users', 'action' => 'logout'));
-				} else {?>
-					<li><?php echo $this->Html->link("Login", array('controller' => 'users', 'action' => 'login'));?></li>
-					<li><?php echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));?></li>
-				<?php } ?>
-				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					   aria-expanded="false">Minha Conta <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="#">Separated link</a></li>
+						<li>
+							<?php if ($this->Session->read('Auth.User')) {
+								echo $this->Html->link("Logout", array('controller' => 'users', 'action' => 'logout'));
+							} else {
+								echo $this->Html->link("Login", array('controller' => 'users', 'action' => 'login'));}?></li>
+						<li><?php echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));?></li>
 					</ul>
 				</li>
-				<li>
-					<a href="#">Usuário <?php echo $this->Html->image('cake.icon.png', array('alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100')); ?></a>
-				</li>
+				<li><a href="#"><?php echo $this->Session->read('Auth.User.username');?></a></li>
+				<li><a href="#"><?php echo $this->Html->image('cake.icon.png', array('alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100')); ?></a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
