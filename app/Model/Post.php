@@ -17,7 +17,6 @@ class Post extends AppModel
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'post_id'
 		)
 	);
 

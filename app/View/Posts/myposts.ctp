@@ -7,10 +7,9 @@
 			<p><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Post", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></p>
 			<table class="table">
 				<tr>
-					<th>Id</th>
-					<th>Title</th>
-					<th>Action</th>
-					<th>Created</th>
+					<th>Título</th>
+					<th>Opções</th>
+					<th>Data de Criação</th>
 				</tr>
 
 				<!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
@@ -19,7 +18,6 @@
 				<?php foreach ($posts as $post): ?>
 
 					<tr>
-						<td><?php echo $post[0]['id']; ?></td>
 						<td>
 							<?php echo $this->Html->link($post[0]['title'], array('action' => 'view', $post[0]['id'])); ?>
 						</td>

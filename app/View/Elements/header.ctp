@@ -19,11 +19,23 @@
 				<li><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'index'))?></li>
 				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'myposts'))?></li>
 				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
-			<li style="position:absolute;left:29%;top:18%;width:30%;"><?php echo $this->Form->create('Search', array('controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
+			<li style="position:relative; margin-top:8px;"><?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search'), array('div' => false)); ?></li>
-			<li style="position:absolute;right:37.8%;top:18%;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+			<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 			<?php echo $this->Form->end();?>
 			</li>
+				<li>
+					<div class="btn-group" style="position:relative;margin-top:8px;">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Tags <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+								<?php foreach($tags as $tag){?>
+									<li><?php echo $this->Html->link($tag[0]['nome'], array('controller' => 'posts', 'action' => 'tagSearch', $tag[0]['id']))?></li>
+								<?php }?>
+						</ul>
+					</div>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">

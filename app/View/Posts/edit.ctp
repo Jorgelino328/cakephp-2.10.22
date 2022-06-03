@@ -10,12 +10,12 @@
 	</div>
 	<div class="form-group">
 	<label>Tags:</label>
-			<ul class="ks-cboxtags">
-				<li><input type="checkbox" id="checkboxOne" name="data[Post][tag_list]" value="acao"><label for="checkboxOne">Ação</label></li>
-				<li><input type="checkbox" id="checkboxTwo" name="data[Post][tag_list]" value="comedia"><label for="checkboxTwo">Comédia</label></li>
-				<li><input type="checkbox" id="checkboxThree" name="data[Post][tag_list]" value="drama"><label for="checkboxThree">Drama</label></li>
-				<li><input type="checkbox" id="checkboxFour" name="data[Post][tag_list]" value="romance"><label for="checkboxFour">Romance</label></li>
-			</ul>
+		<ul class="ks-cboxtags">
+			<input type="hidden" name="data[Post][tags]"/>
+			<?php foreach($tags as $tag){?>
+				<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
+			<?php }?>
+		</ul>
 	</div>
 	<div class="form-group">
     	<?php echo $this->Form->input('id', array('type' => 'hidden','class'=>'form-control'));?>

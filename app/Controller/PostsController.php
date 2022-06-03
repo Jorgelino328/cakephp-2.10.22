@@ -16,6 +16,8 @@ class PostsController extends AppController
 			$key = $this->request->data['Search']['key'];
 			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
 		}
+		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
+		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
 	}
 	function myposts()
 	{
@@ -27,9 +29,21 @@ class PostsController extends AppController
 			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND user_id=$user_id"));
 		}
 	}
+	function tagSearch($id = null)
+	{
+		$tag=$this->Post->Tag->findById($id);
+		$posts_id=$tag['Post'][0]['id'];
+		if (empty($this->request->data)) {
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE id=$posts_id"));
+		} else {
+			$key = $this->request->data['Search']['key'];
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND id=$posts_id"));
+		}
+	}
 
 	public function view($id = null)
 	{
+
 		if (!$id) {
 			throw new NotFoundException(__('Post inválido'));
 		}
@@ -61,7 +75,7 @@ class PostsController extends AppController
 
 	public function add()
 	{
-		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags "));
+		$this->set('tags', $this->query("SELECT * FROM tags "));
 		if ($this->request->is('post')) {
 			$this->request->data['Post']['user_id'] = $this->Auth->user('id');
 			$this->Post->create();
@@ -79,13 +93,14 @@ class PostsController extends AppController
 
 	function edit($id = null)
 	{
+		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags "));
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Post->findById($id);
 		} else {
 			if ($this->Post->save($this->request->data)) {
 				$this->Flash->success('Seu post foi atualizado.');
-				$tags_id = $this->request->data['Post']['tag_list'];
-				$post_id = $this->Post->id;
+				$tags_id = $this->request->data['Post']['tags'];
+				$post_id = $id;
 				$this->Post->query("DELETE FROM posts_tags WHERE post_id=$post_id;");
 				foreach ($tags_id as $tag_id){
 					$this->Post->query("INSERT INTO posts_tags (post_id,tag_id) VALUES ($post_id,$tag_id);");
@@ -101,6 +116,8 @@ class PostsController extends AppController
 			throw new MethodNotAllowedException();
 		}
 		if ($this->Post->delete($id)) {
+
+			$this->Post->query("DELETE FROM posts_tags WHERE post_id=$id");
 			$this->Flash->success('O post com o id: ' . $id . ' foi deletado.');
 			$this->redirect(array('action' => 'index'));
 		}

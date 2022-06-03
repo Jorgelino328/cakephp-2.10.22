@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller
 {
-
+	public $tags;
 	public $components = array(
 		'Flash',
 		'Auth' => array(
@@ -59,6 +59,11 @@ class AppController extends Controller
 		$this->Auth->allow('index', 'view');
 	}
 
+	public function beforeRender()
+	{
+		$tags=$this->Post->Tag->find('all');
+	}
+
 	public function isAuthorized($user)
 	{
 		// Admin can access every action
@@ -70,5 +75,6 @@ class AppController extends Controller
 		// Default deny
 		return false;
 	}
+
 
 }
