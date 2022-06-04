@@ -8,6 +8,7 @@
 			<table class="table">
 				<tr>
 					<th>Título</th>
+					<th>Tags</th>
 					<th>Opções</th>
 					<th>Data de Criação</th>
 				</tr>
@@ -21,6 +22,20 @@
 						<td>
 							<?php echo $this->Html->link($post[0]['title'], array('action' => 'view', $post[0]['id'])); ?>
 						</td>
+									<td>
+                        				<?php foreach ($posts_tags as $posts_tag){
+                        					if($posts_tag[0]['post_id'] == $post[0]['id']) {?>
+                        						<ul class="ks-cboxtags" style="position: relative;top:-25px;display:inline-block;">
+                        						<?php foreach($tags as $tag) {
+                        							if($tag[0]['id']==$posts_tag[0]['tag_id']){?>
+                        								<li	><a href="tags/index"><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" checked/><label class="checkbox-inline"><?php echo $tag[0]['nome'] ?></label></a></li>
+                        					<?php }
+
+                        						}?>
+                        						</ul>
+                        				<?php }
+                        				}?>
+                        			</td>
 						<td>
 								<?php echo $this->Form->postLink(
 									$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),

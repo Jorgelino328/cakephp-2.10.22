@@ -7,10 +7,9 @@
 			<p><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Tag", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-md', 'role'=>'button','escape' => false)); ?></p>
 			<table class="table">
 				<tr>
-					<th>Id</th>
 					<th>Nome</th>
-					<th>Action</th>
-					<th>Created</th>
+					<th>Opções</th>
+					<th>Data de Criação</th>
 				</tr>
 
 				<!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo

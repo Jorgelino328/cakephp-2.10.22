@@ -31,7 +31,7 @@
 						</button>
 						<ul class="dropdown-menu">
 								<?php foreach($tags as $tag){?>
-									<li><?php echo $this->Html->link($tag[0]['nome'], array('controller' => 'posts', 'action' => 'tagSearch', $tag[0]['id']))?></li>
+									<li><?php echo $this->Html->link($tag[0]['nome'], array('controller' => 'posts', 'action' => $this->params['action'], $tag[0]['id']))?></li>
 								<?php }?>
 						</ul>
 					</div>

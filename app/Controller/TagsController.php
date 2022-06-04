@@ -13,7 +13,7 @@ class TagsController extends AppController
 			$this->set('tags', $this->Tag->query("SELECT * FROM tags "));
 		} else {
 			$key = $this->request->data['Search']['key'];
-			$this->set('tags', $this->Post->query("SELECT * FROM tags WHERE nome ILIKE '%$key%'"));
+			$this->set('tags', $this->Tag->query("SELECT * FROM tags WHERE nome ILIKE '%$key%'"));
 		}
 
 	}

@@ -32,7 +32,6 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller
 {
-	public $tags;
 	public $components = array(
 		'Flash',
 		'Auth' => array(
@@ -61,7 +60,8 @@ class AppController extends Controller
 
 	public function beforeRender()
 	{
-		$tags=$this->Post->Tag->find('all');
+		$this->loadModel('Tag');
+        $this->set('tags', $this->Tag->query("SELECT * FROM tags"));
 	}
 
 	public function isAuthorized($user)
