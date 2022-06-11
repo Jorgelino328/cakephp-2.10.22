@@ -1,10 +1,9 @@
 <!-- File: /app/View/Tags/index.ctp -->
 <div class="jumbotron">
+	<h1>Lista de Tags <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Tag", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></h1>
 	<div class="panel panel-default">
 		<!-- Default panel contents -->
-		<div class="panel-heading"><h1>Lista de Tags</h1></div>
 		<div class="panel-body">
-			<p><?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Tag", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-md', 'role'=>'button','escape' => false)); ?></p>
 			<table class="table">
 				<tr>
 					<th>Nome</th>
@@ -18,9 +17,8 @@
 				<?php foreach ($tags as $tag): ?>
 
 					<tr>
-						<td><?php echo $tag[0]['id']; ?></td>
 						<td>
-							<?php echo $this->Html->link($tag[0]['nome'], array('action' => 'view', $tag[0]['id'])); ?>
+							<h4><?php echo $this->Html->link($tag[0]['nome'], array('action' => 'view', $tag[0]['id'])); ?></h4>
 						</td>
 						<td>
 							<?php if ($user['role'] === 'admin') { ?>

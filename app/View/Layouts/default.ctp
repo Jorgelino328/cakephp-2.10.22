@@ -30,7 +30,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 	echo $this->Html->css('bootstrap.min');
 	echo $this->Html->css('bootstrap-theme.min');
-	echo $this->Html->css('tags.css');
+	echo $this->Html->css('tags');
+	echo $this->Html->css('myCss');
 
 	echo $this->Html->script('jquery-3.6.0.min');
 	echo $this->Html->script('bootstrap.min');

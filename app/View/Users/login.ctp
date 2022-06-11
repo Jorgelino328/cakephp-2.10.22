@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<?php echo $this->Flash->render('auth'); ?>
 	<?php echo $this->Form->create('User'); ?>
-		<legend><?php echo __('Please enter your username and password'); ?></legend>
+		<legend><?php echo __('Por favor digite seu nome de usuário e senha'); ?></legend>
 		<div class="form-group">
 			<label>Usuário : </label><?php echo $this->Form->input('username', array('label' => false, 'class'=>'form-control'));?>
 		</div>
