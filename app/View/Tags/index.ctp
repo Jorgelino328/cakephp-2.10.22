@@ -18,7 +18,7 @@
 
 					<tr>
 						<td>
-							<h4><?php echo $this->Html->link($tag[0]['nome'], array('action' => 'view', $tag[0]['id'])); ?></h4>
+							<h4><?php echo $this->Html->link($tag[0]['nome'], array('controller' => 'posts', 'action' => 'index', $tag[0]['id']))?></h4>
 						</td>
 						<td>
 							<?php if ($user['role'] === 'admin') { ?>
@@ -30,7 +30,7 @@
 								);
 							} ?>
 						</td>
-						<td><?php echo $tag[0]['created']; ?></td>
+						<td><?php echo date("d/m/Y", strtotime($tag[0]['created'])); ?></td>
 					</tr>
 				<?php endforeach; ?>
 

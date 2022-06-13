@@ -1,4 +1,4 @@
-<!-- File: /app/View/Posts/index.ctp -->
+<!-- File: /app/View/Posts/my_posts.ctp -->
 <div class="jumbotron">
 	<h1>Meus Posts <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Post", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></h1>
 	<div class="panel panel-default">
@@ -39,7 +39,7 @@
 								) ?>
 								<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post[0]['id']), array( 'class'=>'btn btn-warning btn-xs', 'role'=>'button','escape' => false));
 							} ?></td>
-						<td><?php echo $post[0]['created']; ?></td>
+						<td><?php echo date("d/m/Y", strtotime($post[0]['created'])); ?></td>
 					</tr>
 					<tr>
 						<td colspan="12" class="hiddenRow">

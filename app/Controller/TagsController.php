@@ -20,7 +20,6 @@ class TagsController extends AppController
 
 	public function isAuthorized($user)
 	{
-		// All registered users can add posts
 		if ($this->request->action === 'add') {
 			return true;
 		}
@@ -40,7 +39,7 @@ class TagsController extends AppController
 
 	function delete($id)
 	{
-		if (!$this->request->is('post	')) {
+		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
 		if ($this->Tag->delete($id)) {

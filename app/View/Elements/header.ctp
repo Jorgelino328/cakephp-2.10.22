@@ -1,5 +1,6 @@
 <!--Navbar-->
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-default col-md-12">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -10,31 +11,39 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Blog do Jorge</a>
+			<?php echo $this->Html->link('Blog do Jorge', array('controller' => 'posts', 'action' => 'index'), array('class' => 'navbar-brand'))?>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'index'))?></li>
-				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'myposts'))?></li>
+				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'my_posts'))?></li>
 				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
 			<li style="position:relative; margin-top:8px;"><?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search'), array('div' => false)); ?></li>
-			<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-			<?php echo $this->Form->end();?>
-			</li>
 				<li>
 					<div class="btn-group" style="position:relative;margin-top:8px;">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Tags <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-								<?php foreach($tags as $tag){?>
-									<li><?php echo $this->Html->link($tag[0]['nome'], array('controller' => 'posts', 'action' => $this->params['action'], $tag[0]['id']))?></li>
-								<?php }?>
+								<?php //foreach($tags as $tag){?>
+									<li><input id="<?php //echo $tag[0]['id']?>"  type="checkbox" name="data[Tag][id][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>">. <?php echo $tag[0]['nome']?></label></li>
+								<?php //}?>
 						</ul>
 					</div>
+				</li>
+				<li>
+					<div class="btn-group" style="position:relative;margin-top:8px;">
+						<button type="button" class="btn btn-default dropdown-toggle date" data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false"   id="datepicker">
+							<span class="glyphicon glyphicon-calendar"></span> <span class="caret"></span>
+						</button>
+					</div>
+				</li>
+				<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					<?php echo $this->Form->end();?>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -55,5 +64,13 @@
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
+	<script>
+		$('#datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			autoclose: true,
+			language:'pt-BR',
+			startDate: '+0'
+		});
+	</script>
 </nav>
 <!--End of Navbar-->

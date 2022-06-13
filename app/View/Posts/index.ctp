@@ -23,7 +23,7 @@
 												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
 													<?php foreach($tags as $tag) {
 														if($tag[0]['id']==$posts_tag[0]['tag_id']){?>
-															<li	><a href="tags/index"><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" checked/><label class="checkbox-inline"><?php echo $tag[0]['nome'] ?></label></a></li>
+															<li	><a href="posts/index/<?php echo $tag[0]['id']?>"><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" checked/><label class="checkbox-inline"><?php echo $tag[0]['nome'] ?></label></a></li>
 														<?php }
 													}?>
 												</ul>
@@ -38,7 +38,7 @@
 											) ?>
 											<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post[0]['id']), array( 'class'=>'btn btn-warning btn-xs', 'role'=>'button','escape' => false));
 										} ?></td>
-									<td><?php echo $post[0]['created']; ?></td>
+									<td><?php echo date("d/m/Y", strtotime($post[0]['created'])); ?></td>
 								</tr>
 								<tr>
 									<td colspan="12" class="hiddenRow">
