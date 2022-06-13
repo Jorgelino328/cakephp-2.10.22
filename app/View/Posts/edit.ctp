@@ -21,7 +21,7 @@
     	<?php echo $this->Form->input('id', array('type' => 'hidden','class'=>'form-control'));?>
 	</div>
 	<div class="form-group">
-		<button class="btn btn-primary" type="submit" style=" margin: 0 auto; float: none;">Login</button>
+		<button class="btn btn-primary" type="submit" style=" margin: 0 auto; float: none;">Salvar</button>
 	</div>
     	<?php echo $this->Form->end();?>
 </div>

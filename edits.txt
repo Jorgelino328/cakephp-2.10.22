@@ -1,58 +1,74 @@
+<nav class="navbar navbar-default col-md-12">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<?php echo $this->Html->link('Blog do Jorge', array('controller' => 'posts', 'action' => 'index'), array('class' => 'navbar-brand'))?>
+		</div>
 
-	VIEW TAGS:
-	<div class="form-group">
-		<label>Tags:</label>
-		<ul class="ks-cboxtags">
-			<li><input type="checkbox" id="checkboxOne" name="data[Post][tag_id]" value="acao"><label for="checkboxOne">Ação</label></li>
-			<li><input type="checkbox" id="checkboxTwo" name="data[Post][tag_id]" value="comedia"><label for="checkboxTwo">Comédia</label></li>
-			<li><input type="checkbox" id="checkboxThree" name="data[Post][tag_id]" value="drama"><label for="checkboxThree">Drama</label></li>
-			<li><input type="checkbox" id="checkboxFour" name="data[Post][tag_id]" value="romance"><label for="checkboxFour">Romance</label></li>
-		</ul>
-	</div>
-
-
-
-
-
-
-<POSTS>
-
-
-	<!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
-	as informações dos posts -->
-	<?php $user=$this->Session->read('Auth.User');?>
-	<?php foreach ($posts as $post){ ?>
-
-		<tr>
-			<td>
-				<?php echo $this->Html->link($post[0]['title'], array('action' => 'view', $post[0]['id'])); ?>
-			</td>
-			<td>
-				<?php foreach ($posts_tags as $posts_tag){
-					if($posts_tag[0]['post_id'] == $post[0]['id']) {?>
-						<ul class="ks-cboxtags" style="position: relative;top:-25px;display:inline-block;">
-						<?php foreach($tags as $tag) {
-							if($tag[0]['id']==$posts_tag[0]['tag_id']){?>
-								<li	><a href="tags/index"><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" checked/><label class="checkbox-inline"><?php echo $tag[0]['nome'] ?></label></a></li>
-					<?php }
-
-						}?>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'index'))?></li>
+				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'my_posts'))?></li>
+				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
+			<li style="position:relative; margin-top:8px;"><?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
+				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search'), array('div' => false)); ?></li>
+				<li>
+					<div class="btn-group" style="position:relative;margin-top:8px;">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Tags <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+								<?php //foreach($tags as $tag){?>
+									<li><input id="<?php //echo $tag[0]['id']?>"  type="checkbox" name="data[Tag][id][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>">. <?php echo $tag[0]['nome']?></label></li>
+								<?php //}?>
 						</ul>
-				<?php }
-				}?>
-			</td>
-			<td>
-				<?php if ($post[0]['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
-
-					<?php echo $this->Form->postLink(
-							$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
-							array('action' => 'delete', $post[0]['id']), array( 'class'=>'btn btn-danger btn-xs', 'role'=>'button','escape' => false),
-							array('confirm' => 'Are you sure?')
-					) ?>
-					<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post[0]['id']), array( 'class'=>'btn btn-warning btn-xs', 'role'=>'button','escape' => false));
-				} ?>
-			</td>
-			<td><?php echo $post[0]['created']; ?></td>
-		</tr>
-	<?php } ?>
-
+					</div>
+				</li>
+				<li>
+					<div class="btn-group" style="position:relative;margin-top:8px;">
+						<button type="button" class="btn btn-default dropdown-toggle date" data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false"   id="datepicker">
+							<span class="glyphicon glyphicon-calendar"></span> <span class="caret"></span>
+						</button>
+					</div>
+				</li>
+				<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					<?php echo $this->Form->end();?>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false">Minha Conta <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<?php if ($this->Session->read('Auth.User')) {
+								echo $this->Html->link("Logout", array('controller' => 'users', 'action' => 'logout'));
+							} else {
+								echo $this->Html->link("Login", array('controller' => 'users', 'action' => 'login'));}?></li>
+						<li><?php echo $this->Html->link("  Cadastro", array('controller' => 'users', 'action' => 'add'));?></li>
+					</ul>
+				</li>
+				<li><a href="#"><?php echo $this->Session->read('Auth.User.username');?></a></li>
+				<li><a href="#"><?php echo $this->Html->image('cake.icon.png', array('alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100')); ?></a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+	<script>
+		$('#datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			autoclose: true,
+			language:'pt-BR',
+			startDate: '+0'
+		});
+	</script>
+</nav>
+<!--End of Navbar-->

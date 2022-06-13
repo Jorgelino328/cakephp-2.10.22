@@ -28,9 +28,9 @@
 							Tags <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-								<?php //foreach($tags as $tag){?>
-									<li><input id="<?php //echo $tag[0]['id']?>"  type="checkbox" name="data[Tag][id][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>">. <?php echo $tag[0]['nome']?></label></li>
-								<?php //}?>
+								<?php/* foreach($tags as $tag){?>
+									<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Tag][id][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>">. <?php echo $tag[0]['nome']?></label></li>
+								<?php }*/?>
 						</ul>
 					</div>
 				</li>

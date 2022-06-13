@@ -12,7 +12,7 @@ class PostsController extends AppController
 	{
 		$data=$this->request->data;
 		if(!empty($data['Tag'])){
-				$tag_list=$this->Post->Tag->findById($data['Tag']['id']);
+				$tag_list=$this->Post->Tag->findAllById($data['Tag']['id']);
 				echo json_encode($tag_list);
         		if(empty($tag_list)){
         			$this->set('posts', $this->Post->query("SELECT * FROM posts"));

@@ -10,12 +10,11 @@ class TagsController extends AppController
 	function index()
 	{
 		if (empty($this->request->data)) {
-			$this->set('tags', $this->Tag->query("SELECT * FROM tags "));
+			$this->set('tags', $this->Tag->query("SELECT * FROM tags"));
 		} else {
 			$key = $this->request->data['Search']['key'];
 			$this->set('tags', $this->Tag->query("SELECT * FROM tags WHERE nome ILIKE '%$key%'"));
 		}
-
 	}
 
 	public function isAuthorized($user)
