@@ -1,0 +1,12 @@
+.panel {
+	border: 0;
+}
+
+.table > thead > tr > th, .table > thead > tr > td {
+	border: 0;
+}
+
+.hiddenRow {
+	padding: 0 !important;
+	border-color: FFF;
+}

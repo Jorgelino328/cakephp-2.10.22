@@ -37,7 +37,7 @@ ul.ks-cboxtags li label::before {
 	-webkit-font-smoothing: antialiased;
 	font-family: "Glyphicons Halflings";
 	font-weight: 900;
-	font-size: 12px;
+	font-size: 8px;
 	padding: 2px 6px 2px 2px;
 	content: "\002b";
 	transition: transform .3s ease-in-out;
@@ -66,3 +66,4 @@ ul.ks-cboxtags li input[type="checkbox"] {
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 	border: 2px solid #e9a1ff;
 }
+

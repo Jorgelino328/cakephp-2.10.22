@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!-- saved from url=(0132)http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>
+		CakePHP: the rapid development php framework:
+		Posts	</title>
+	<link href="http://localhost:8080/favicon.ico" type="image/x-icon" rel="icon"><link href="http://localhost:8080/favicon.ico" type="image/x-icon" rel="shortcut icon"><link rel="stylesheet" type="text/css" href="./CakePHP_ the rapid development php framework_ Posts_files/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="./CakePHP_ the rapid development php framework_ Posts_files/bootstrap-datepicker.css"><link rel="stylesheet" type="text/css" href="./CakePHP_ the rapid development php framework_ Posts_files/bootstrap-theme.min.css"><link rel="stylesheet" type="text/css" href="./CakePHP_ the rapid development php framework_ Posts_files/tags.css"><link rel="stylesheet" type="text/css" href="./CakePHP_ the rapid development php framework_ Posts_files/myCss.css"><script type="text/javascript" src="./CakePHP_ the rapid development php framework_ Posts_files/jquery-3.6.0.min.js"></script><script type="text/javascript" src="./CakePHP_ the rapid development php framework_ Posts_files/bootstrap.min.js"></script><script type="text/javascript" src="./CakePHP_ the rapid development php framework_ Posts_files/bootstrap-datepicker.min.js"></script><script type="text/javascript" src="./CakePHP_ the rapid development php framework_ Posts_files/bootstrap-datepicker.pt-BR.min.js"></script></head>
+<body>
+
+<div id="container">
+	<div id="header">
+		<!--Navbar-->
+
+<nav class="navbar navbar-default col-md-12">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="http://localhost:8080/" class="navbar-brand">Blog do Jorge</a>		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="http://localhost:8080/">Home</a></li>
+				<li><a href="http://localhost:8080/posts/my_posts">Meus Posts</a></li>
+				<li><a href="http://localhost:8080/tags">Tags</a></li>
+			<li style="position:relative; margin-top:8px;"><form action="http://localhost:8080/posts/index" controller="posts" method="post" id="SearchIndexForm" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"></div>				<div class="input text"><input name="data[Search][key]" class="form-control" placeholder="Buscar..." type="text" id="SearchKey"></div></form></li>
+				<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+									</li>
+				<div class="btn-group" style="position:relative;margin-top:8px;">
+					<a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada" role="button" class="btn btn-default">
+						Busca Avançada
+					</a>
+				</div>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Minha Conta <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="http://localhost:8080/users/logout">Logout</a></li>
+						<li><a href="http://localhost:8080/users/add">  Cadastro</a></li>
+					</ul>
+				</li>
+				<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Admin</a></li>
+				<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#"><img src="./CakePHP_ the rapid development php framework_ Posts_files/cake.icon.png" alt="CakePHP" border="0" data-src="holder.js/100%x100"></a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+<!--End of Navbar-->
+	</div>
+	<div id="content">
+
+		
+		<!-- File: /app/View/Posts/index.ctp -->
+<div class="jumbotron">
+	<h1>Posts do Blog <a href="http://localhost:8080/posts/add" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span> Criar Post</a></h1>
+	<div class="panel panel-default">
+						<div class="panel-body">
+							<table class="table">
+								<thead>
+								<tr>
+									<th>Título</th>
+									<th>Tags</th>
+									<th>Opções</th>
+									<th>Data de Criação</th>
+								</tr>
+
+								</thead>
+								<tbody>
+																								<tr data-toggle="collapse" data-target="#post114" class="accordion-toggle">
+									<td><h3>Post Postoso</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/3"><input id="3" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Comédia</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/114" name="post_62a8c45872e0d858401178" id="post_62a8c45872e0d858401178" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45872e0d858401178.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/114" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post114">
+											<h4>wqwd3f2gqe32fqe3</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post122" class="accordion-toggle">
+									<td><h3>Teste Testudo</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/2"><input id="2" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Ação</label></a></li>
+																										</ul>
+																							<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/5"><input id="5" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Romance</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/122" name="post_62a8c45873106470670186" id="post_62a8c45873106470670186" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45873106470670186.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/122" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>13/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post122">
+											<h4>sadasdsdasdasasdadasdsds</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post121" class="accordion-toggle">
+									<td><h3>teste</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/3"><input id="3" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Comédia</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/121" name="post_62a8c45873189163327169" id="post_62a8c45873189163327169" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45873189163327169.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/121" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>13/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post121">
+											<h4>erwererwrkgfm,sdf
+lorem ipsum
+asnbergnscjhbfdscjnmk
+jegrwfkjknergfmeklngr</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post120" class="accordion-toggle">
+									<td><h3>yisds</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/4"><input id="4" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Drama</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/120" name="post_62a8c458731f7841618484" id="post_62a8c458731f7841618484" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c458731f7841618484.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/120" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post120">
+											<h4>wewew</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post119" class="accordion-toggle">
+									<td><h3>Meu post</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/2"><input id="2" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Ação</label></a></li>
+																										</ul>
+																							<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/4"><input id="4" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Drama</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/119" name="post_62a8c45873257818609675" id="post_62a8c45873257818609675" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45873257818609675.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/119" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post119">
+											<h4>afgWEew</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post118" class="accordion-toggle">
+									<td><h3>324324243</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/3"><input id="3" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Comédia</label></a></li>
+																										</ul>
+																							<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/5"><input id="5" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Romance</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/118" name="post_62a8c4587331e754228276" id="post_62a8c4587331e754228276" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c4587331e754228276.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/118" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post118">
+											<h4>ljhoooo</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post117" class="accordion-toggle">
+									<td><h3>ewfwere</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/2"><input id="2" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Ação</label></a></li>
+																										</ul>
+																							<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/5"><input id="5" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Romance</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/117" name="post_62a8c45873398325078809" id="post_62a8c45873398325078809" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45873398325078809.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/117" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post117">
+											<h4>e ew</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post116" class="accordion-toggle">
+									<td><h3>Beibe beibe do biruleibe leibe</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/5"><input id="5" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Romance</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/116" name="post_62a8c45873452265671658" id="post_62a8c45873452265671658" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45873452265671658.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/116" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post116">
+											<h4>sdfghjkl;''
+</h4>
+										</div>
+									</td>
+								</tr>
+																<tr data-toggle="collapse" data-target="#post115" class="accordion-toggle">
+									<td><h3>wew</h3><h3></h3></td>
+									<td>												<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
+																												<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/index/2"><input id="2" type="checkbox" name="data[Post][tags][]" checked=""><label class="checkbox-inline">Ação</label></a></li>
+																										</ul>
+											</td>
+									<td>
+											<form action="http://localhost:8080/posts/delete/115" name="post_62a8c45873502480899288" id="post_62a8c45873502480899288" style="display:none;" method="post"><input type="hidden" name="_method" value="POST"></form><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#" class="btn btn-danger btn-xs" role="button" onclick="if (confirm({&quot;confirm&quot;:&quot;Are you sure?&quot;})) { document.post_62a8c45873502480899288.submit(); } event.returnValue = false; return false;"><span class="glyphicon glyphicon-trash"></span></a>											<a href="http://localhost:8080/posts/edit/115" class="btn btn-warning btn-xs" role="button"><span class="glyphicon glyphicon-wrench"></span></a></td>
+									<td>03/06/2022</td>
+								</tr>
+								<tr>
+									<td colspan="12" class="hiddenRow">
+										<div class="accordian-body collapse" id="post115">
+											<h4>wewewewewewewe</h4>
+										</div>
+									</td>
+								</tr>
+																</tbody>
+							</table>
+						</div>
+	</div>
+</div>
+	</div>
+	<div id="footer">
+		<div class="container">
+	<section style="height:80px;"></section>
+	<div class="row" style="text-align:center;">
+		<h2>Bootstrap Dark Footer UI</h2>
+	</div>
+	<!----------- Footer ------------>
+	<footer class="footer-bs">
+		<div class="row">
+			<div class="col-md-3 footer-brand animated fadeInLeft">
+				<h2>Logo</h2>
+				<p>Suspendisse hendrerit tellus laoreet luctus pharetra. Aliquam porttitor vitae orci nec ultricies. Curabitur vehicula, libero eget faucibus faucibus, purus erat eleifend enim, porta pellentesque ex mi ut sem.</p>
+				<p>© 2014 BS3 UI Kit, All rights reserved</p>
+			</div>
+			<div class="col-md-4 footer-nav animated fadeInUp">
+				<h4>Menu —</h4>
+				<div class="col-md-6">
+					<ul class="pages">
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Travel</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Nature</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Explores</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Science</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Advice</a></li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<ul class="list">
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">About Us</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Contacts</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Terms &amp; Condition</a></li>
+						<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Privacy Policy</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2 footer-social animated fadeInDown">
+				<h4>Follow Us</h4>
+				<ul>
+					<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Facebook</a></li>
+					<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Twitter</a></li>
+					<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">Instagram</a></li>
+					<li><a href="http://localhost:8080/posts/index/posts/index/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/posts/busca_avancada#">RSS</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 footer-ns animated fadeInRight">
+				<h4>Newsletter</h4>
+				<p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+				<p>
+				</p><div class="input-group">
+					<input type="text" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
+                      </span>
+				</div><!-- /input-group -->
+				<p></p>
+			</div>
+		</div>
+	</footer>
+	<section style="text-align:center; margin:10px auto;"><p>Designed by <a href="http://enfoplus.net/">Prince J. Sargbah</a></p></section>
+
+</div>
+	</div>
+</div>
+
+
+</body></html>

@@ -12,12 +12,13 @@ class PostsController extends AppController
 		if(!empty($data['Tags'])){
 			if (empty($data['Search']['key'])) {
 				$tag_ids=$data['Tags'];
+				$post_ids=array();
 				foreach($tag_ids as $tag_id){
-					$post_ids['ids'][] = $this->Post->query("SELECT post_id FROM posts_tags WHERE tag_id=$tag_id");
+					array_push($post_ids,array_values($this->Post->query("SELECT post_id FROM posts_tags WHERE tag_id=$tag_id")));
 				}
+				echo json_encode($post_ids);
+				//$posts=$this->Post->findById($post_ids);
 
-				$posts=$this->Post->query("SELECT * FROM posts WHERE id=4");
-				$posts=$this->Post->query("SELECT * FROM posts WHERE id=4");
 				//echo json_encode($posts);
 				if($data['SearchType']==1){
 					//$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE "));
