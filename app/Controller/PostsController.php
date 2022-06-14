@@ -6,64 +6,61 @@ class PostsController extends AppController
 {
 	public $helpers = array('Html', 'Form');
 	public $name = 'Posts';
+	function busca_avancada()
+	{
+		$data=$this->request->data;
+		if(!empty($data['Tags'])){
+			if (empty($data['Search']['key'])) {
+				$tag_ids=$data['Tags'];
+				foreach($tag_ids as $tag_id){
+					$post_ids['ids'][] = $this->Post->query("SELECT post_id FROM posts_tags WHERE tag_id=$tag_id");
+				}
 
+				$posts=$this->Post->query("SELECT * FROM posts WHERE id=4");
+				$posts=$this->Post->query("SELECT * FROM posts WHERE id=4");
+				//echo json_encode($posts);
+				if($data['SearchType']==1){
+					//$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE "));
+				}else{
+					//$this->set('posts', $this->Post->query("SELECT * FROM posts "));
+				}
+			}
+		}else {
+			if (empty($data['Search']['key'])) {
+				$this->set('posts', $this->Post->query("SELECT * FROM posts "));
+			} else {
+				$key = $data['Search']['key'];
+				$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
+			}
+		}
+		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
+		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
+	}
 
 	function index()
 	{
 		$data=$this->request->data;
-		if(!empty($data['Tag'])){
-				$tag_list=$this->Post->Tag->findAllById($data['Tag']['id']);
-				echo json_encode($tag_list);
-        		if(empty($tag_list)){
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts"));
-        			$this->Flash->error(__('Não existem posts com essa tag!'));
-        		}else if (empty($data['Search'])) {
-					$posts_id=$tag_list['Post'][0]['id'];
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE id=$posts_id"));
-        		} else {
-					$posts_id=$tag_list['Post'][0]['id'];
-        			$key = $data['Search']['key'];
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND id=$posts_id"));
-        		}
-        }else{
-        		if (empty($data['Search'])) {
+		if (empty($data['Search']['key'])) {
         			$this->set('posts', $this->Post->query("SELECT * FROM posts "));
-        		} else {
+		} else {
         			$key = $data['Search']['key'];
         			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
-        		}
-        }
+		}
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
 		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
 	}
-	function my_posts($id = null)
+	function my_posts()
 	{
-		if($id){
-				$tag=$this->Post->Tag->findById($id);
-				$user_id=$this->Auth->User('id');
-        		if(empty($tag['Post'])){
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE user_id=$user_id"));
-                    $this->Flash->error(__('Não existem posts com essa tag!'));
-                }else if (empty($this->request->data)) {
-					$posts_id=$tag['Post'][0]['id'];
-					$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE id=$posts_id AND user_id=$user_id"));
-        		} else {
-					$posts_id=$tag['Post'][0]['id'];
-        			$key = $this->request->data['Search']['key'];
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND id=$posts_id AND user_id=$user_id"));
-        		}
-		}else{
-				$user_id=$this->Auth->User('id');
-        		if (empty($this->request->data)) {
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE user_id=$user_id"));
-        		} else {
-        			$key = $this->request->data['Search']['key'];
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND user_id=$user_id"));
-        		}
-        }
+		$user_id=$this->Auth->User('id');
+		if (empty($data['Search']['key'])) {
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE user_id=$user_id"));
+		} else {
+			$key = $this->request->data['Search']['key'];
+			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND user_id=$user_id"));
+		}
+
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
         $this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
-
 	}
 
 	public function view($id = null)

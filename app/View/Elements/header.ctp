@@ -21,30 +21,15 @@
 				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'my_posts'))?></li>
 				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
 			<li style="position:relative; margin-top:8px;"><?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
-				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Search'), array('div' => false)); ?></li>
-				<li>
-					<div class="btn-group" style="position:relative;margin-top:8px;">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Tags <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-								<?php/* foreach($tags as $tag){?>
-									<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Tag][id][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>">. <?php echo $tag[0]['nome']?></label></li>
-								<?php }*/?>
-						</ul>
-					</div>
-				</li>
-				<li>
-					<div class="btn-group" style="position:relative;margin-top:8px;">
-						<button type="button" class="btn btn-default dropdown-toggle date" data-toggle="dropdown" role="button" aria-haspopup="true"
-								aria-expanded="false"   id="datepicker">
-							<span class="glyphicon glyphicon-calendar"></span> <span class="caret"></span>
-						</button>
-					</div>
-				</li>
+				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Buscar...'), array('div' => false)); ?></li>
 				<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					<?php echo $this->Form->end();?>
 				</li>
+				<div class="btn-group" style="position:relative;margin-top:8px;">
+					<a href="posts/busca_avancada" role="button" class="btn btn-default" >
+						Busca Avançada
+					</a>
+				</div>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -64,13 +49,5 @@
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
-	<script>
-		$('#datepicker').datepicker({
-			format: 'dd/mm/yyyy',
-			autoclose: true,
-			language:'pt-BR',
-			startDate: '+0'
-		});
-	</script>
 </nav>
 <!--End of Navbar-->
