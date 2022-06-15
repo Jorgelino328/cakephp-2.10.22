@@ -1,18 +1,19 @@
 <!-- File: /app/View/Posts/index.ctp -->
 <div class="jumbotron">
-				<?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
-					<div class="input-group">
-						<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Buscar...')); ?>
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-						</span>
-
-					<div class="input-group input-daterange" id="datepicker">
-							<input type="text" class="form-control" value="2012-04-05">
-							<div class="input-group-addon">até</div>
-							<input type="text" class="form-control" value="2012-04-19">
-						</div>
-					</div>
+	<?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
+	<div class="form-group form-inline col-md-12">
+		<div class="input-group col-md-8">
+		<?php echo $this->Form->input('key', array('div'=>false,'label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Buscar...')); ?>
+		<span class="input-group-btn">
+			<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+		</span>
+		</div>
+		<div class="input-group col-md-3">
+			<input type="text" class="form-control datepicker" name="before">
+			<div class="input-group-addon">até</div>
+			<input type="text" class="form-control datepicker" name="after">
+		</div>
+	</div>
 			<ul class="ks-cboxtags">
 				<input type="hidden" name="data[Tags]"/>
 				<?php foreach($tags as $tag){?>
@@ -57,16 +58,19 @@
 									</ul>
 								<?php }
 							}?></td>
-						<td><?php if ($post['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
+						<td style="text-align: center; vertical-align: middle;"	><div class="btn-toolbar" role="toolbar" ><?php if ($post
+										['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
 
-								<?php echo $this->Form->postLink(
-									$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
-									array('action' => 'delete', $post['id']), array( 'class'=>'btn btn-danger btn-xs', 'role'=>'button','escape' => false),
-									array('confirm' => 'Are you sure?')
-								) ?>
-								<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post['id']), array( 'class'=>'btn btn-warning btn-xs', 'role'=>'button','escape' => false));
-							} ?></td>
-						<td><?php echo date("d/m/Y", strtotime($post['created'])); ?></td>
+									<?php echo $this->Form->postLink(
+											$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
+											array('action' => 'delete', $post
+											['id']), array( 'class'=>'btn btn-danger btn-lg', 'role'=>'button','escape' => false),
+											array('confirm' => 'Are you sure?')
+									) ?>
+									<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post
+									['id']), array( 'class'=>'btn btn-warning btn-lg', 'role'=>'button','escape' => false));
+								} ?></div></td>
+						<td><?php echo date("d-m-Y", strtotime($post['created'])); ?></td>
 					</tr>
 					<tr>
 						<td colspan="12" class="hiddenRow">
@@ -82,10 +86,10 @@
 	</div>
 </div>
 <script>
-	$('#datepicker').datepicker({
-		format: 'dd/mm/yyyy',
+	$('.datepicker').datepicker({
+		setDate: new Date(),
+		format: 'dd-mm-yyyy',
 		autoclose: true,
 		language:'pt-BR',
-		startDate: '+0'
-	});
+	}).datepicker("setDate",'now');;
 </script>

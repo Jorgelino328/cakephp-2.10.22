@@ -6,99 +6,151 @@ class PostsController extends AppController
 {
 	public $helpers = array('Html', 'Form');
 	public $name = 'Posts';
-	function busca_avancada()
+	function busca_avancada($id=null)
 	{
-		$data=$this->request->data;
-
-		if(!empty($data['Tags'])){
-
-			$tags=$this->Post->Tag->findAllById($data['Tags']);
-			$posts=array();
-			for($i=0;$i<sizeof($data['Tags']);$i++){
-				$posts=array_merge($posts,$tags[$i]['Post']);
-			}
-			$inclusive= [];
-			$exclusive= [];
-			foreach ($posts as $v) {
-				if (!isset($inclusive[$v['id']])) {
-					$inclusive[$v['id']] = $v;
-				}else{
-					$exclusive[$v['id']] = $v;
-				}
-			}
-			if (empty($data['Search']['key'])) {
-				if($data['SearchType']==1){
-					$posts = array_values($inclusive);
-					$this->set('posts', $posts);
-				}else {
-					$posts = array_values($exclusive);
-					$this->set('posts', $posts);
-				}
-			}else{
-				if($data['SearchType']==1){
-					$posts = array_values($inclusive);
-					$key = $data['Search']['key'];
-					$search=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
-					$result=[];
-					$c=0;
-					foreach($search as $p){
-						if($p[0]['id']==$posts[$c]['id']){
-							$result=$p;
-						}
-						$c++;
-					}
-					$this->set('posts', $result);
-				}else {
-					$posts = array_values($exclusive);
-					$key = $data['Search']['key'];
-					$search=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
-					$result=[];
-					$c=0;
-					foreach($search as $p){
-						if($p[0]['id']==$posts[$c]['id']){
-							$result=$p;
-						}
-						$c++;
-					}
-					$this->set('posts', $result);
-				}
-			}
+		if($id){
+			$tag=$this->Post->Tag->findAllById($id);
+			$posts=$tag[0]['Post'];
+			$this->set('posts', $posts);
 		}else {
+			$data = $this->request->data;
+			if (empty($data)) {
+				$posts = $this->Post->query("SELECT * FROM posts ");
+				$this->set('posts', array_column($posts, 0));
+			} else if (!empty($data['Tags'])) {
+				$tags = $this->Post->Tag->findAllById($data['Tags']);
+				$posts = array();
+				for ($i = 0; $i < sizeof($data['Tags']); $i++) {
+					$posts = array_merge($posts, $tags[$i]['Post']);
+				}
+				$inclusive = [];
+				$exclusive = [];
+				foreach ($posts as $v) {
+					if (!isset($inclusive[$v['id']])) {
+						$inclusive[$v['id']] = $v;
+					} else {
+						$exclusive[$v['id']] = $v;
+					}
+				}
+				if (empty($data['Search']['key'])) {
+					if ($data['SearchType'] == 1) {
+						$posts = array_values($inclusive);
+						$result = [];
+						$c = 0;
+						foreach ($posts as $p) {
+							if ($data['before'] <= date("d-m-Y", strtotime($p[0]['created'])) && date("d-m-Y", strtotime($p[0]['created'])) <= $data['after']) {
+								array_push($result, $p);
+							}
+							$c++;
+						}
+						$this->set('posts', $result);
+					} else {
+						$posts = array_values($exclusive);
+						$result = [];
+						$c = 0;
+						foreach ($posts as $p) {
+							if ($data['before'] <= date("d-m-Y", strtotime($p[0]['created'])) && date("d-m-Y", strtotime($p[0]['created'])) <= $data['after']) {
+								array_push($result, $p);
+							}
+							$c++;
+						}
+						$this->set('posts', $result);
+					}
+				} else {
+					if ($data['SearchType'] == 1) {
+						$posts = array_values($inclusive);
+						$key = $data['Search']['key'];
+						$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+						$result = [];
+						$c = 0;
+						foreach ($search as $s) {
+							if ($s[0]['id'] == $posts[$c]['id'] && $data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
+								array_push($result, $s);
+							}
+							$c++;
+						}
+						$this->set('posts', array_column($result, 0));
+					} else {
+						$posts = array_values($exclusive);
+						$key = $data['Search']['key'];
+						$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+						$result = [];
+						$c = 0;
+						foreach ($search as $s) {
+							if ($s[0]['id'] == $posts[$c]['id'] && $data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
+								array_push($result, $s);
+							}
+							$c++;
+						}
+						$this->set('posts', array_column($result, 0));
+					}
+				}
+			} else {
+				if (empty($data['Search']['key'])) {
+					$search = $this->Post->query("SELECT * FROM posts ");
+					$result = [];
+					foreach ($search as $s) {
+						if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
+							array_push($result, $s);
+						}
+					}
+					$this->set('posts', array_column($result, 0));
+				} else {
+					$key = $data['Search']['key'];
+					$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+					$result = [];
+					foreach ($search as $s) {
+						if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
+							array_push($result, $s);
+						}
+					}
+
+					$this->set('posts', array_column($result, 0));
+				}
+			}
+		}
+		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
+		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
+	}
+
+	function index($id=null)
+	{
+		if($id){
+			$tag=$this->Post->Tag->findAllById($id);
+			$posts=$tag[0]['Post'];
+			$this->set('posts', $posts);
+		}else {
+			$data = $this->request->data;
 			if (empty($data['Search']['key'])) {
-				$search=$this->Post->query("SELECT * FROM posts ");
-				$this->set('posts', array_column($search,0));
+				$posts=$this->Post->query("SELECT * FROM posts");
+				$this->set('posts', array_column($posts,0) );
 			} else {
 				$key = $data['Search']['key'];
-				$search=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
-				$this->set('posts', array_column($search,0));
+				$posts = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+				$this->set('posts', array_column($posts,0) );
 			}
-		}
-		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
-		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
-	}
 
-	function index()
-	{
-		$data=$this->request->data;
-		if (empty($data['Search']['key'])) {
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts "));
-		} else {
-        			$key = $data['Search']['key'];
-        			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
 		}
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
 		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
 	}
-	function my_posts()
+	function my_posts($id=null)
 	{
 		$user_id=$this->Auth->User('id');
-		if (empty($data['Search']['key'])) {
-			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE user_id=$user_id"));
-		} else {
-			$key = $this->request->data['Search']['key'];
-			$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND user_id=$user_id"));
+		if($id){
+			$tag=$this->Post->Tag->findAllById($id);
+			$posts=$tag[0]['Post'];
+			$this->set('posts', $posts);
+		}else {
+			if (empty($data['Search']['key'])) {
+				$posts=$this->Post->query("SELECT * FROM posts WHERE user_id=$user_id");
+				$this->set('posts', array_column($posts,0) );
+			} else {
+				$key = $this->request->data['Search']['key'];
+				$posts=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%' AND user_id=$user_id");
+				$this->set('posts', array_column($posts,0));
+			}
 		}
-
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
         $this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
 	}

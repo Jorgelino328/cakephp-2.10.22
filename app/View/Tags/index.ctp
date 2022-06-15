@@ -20,15 +20,16 @@
 						<td>
 							<h4><?php echo $this->Html->link($tag[0]['nome'], array('controller' => 'posts', 'action' => 'index', $tag[0]['id']))?></h4>
 						</td>
-						<td>
+						<td style="text-align: center; vertical-align: middle;"	><div class="btn-toolbar" role="toolbar" >
 							<?php if ($user['role'] === 'admin') { ?>
 
 								<?php echo $this->Form->postLink(
 										$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
-										array('action' => 'delete', $tag[0]['id']), array( 'class'=>'btn btn-danger btn-xs', 'role'=>'button','escape' => false),
+										array('action' => 'delete', $tag[0]['id']), array( 'class'=>'btn btn-danger btn-lg', 'role'=>'button','escape' => false),
 										array('confirm' => 'Are you sure?')
 								);
 							} ?>
+							</div>
 						</td>
 						<td><?php echo date("d/m/Y", strtotime($tag[0]['created'])); ?></td>
 					</tr>

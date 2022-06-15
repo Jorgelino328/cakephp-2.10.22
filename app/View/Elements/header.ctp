@@ -26,7 +26,7 @@
 					<?php echo $this->Form->end();?>
 				</li>
 				<div class="btn-group" style="position:relative;margin-top:8px;">
-					<a href="posts/busca_avancada" role="button" class="btn btn-default" >
+					<a href="/posts/busca_avancada" role="button" class="btn btn-default" >
 						Busca Avançada
 					</a>
 				</div>
