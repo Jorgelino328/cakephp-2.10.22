@@ -11,19 +11,26 @@ class PostsController extends AppController
 		$data=$this->request->data;
 		if(!empty($data['Tags'])){
 			if (empty($data['Search']['key'])) {
-				$tag_ids=$data['Tags'];
-				$post_ids=array();
-				foreach($tag_ids as $tag_id){
-					array_push($post_ids,array_values($this->Post->query("SELECT post_id FROM posts_tags WHERE tag_id=$tag_id")));
+				$tags=$this->Post->Tag->findAllById($data['Tags']);
+				$posts=array();
+				for($i=0;$i<sizeof($data['Tags']);$i++){
+					$posts=array_merge($posts,$tags[$i]['Post']);
 				}
-				echo json_encode($post_ids);
-				//$posts=$this->Post->findById($post_ids);
-
-				//echo json_encode($posts);
+				$inclusive= [];
+				$exclusive= [];
+				foreach ($posts as $v) {
+					if (!isset($inclusive[$v['id']])) {
+						$inclusive[$v['id']] = $v;
+					}else{
+						$exclusive[$v['id']] = $v;
+					}
+				}
 				if($data['SearchType']==1){
-					//$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE "));
-				}else{
-					//$this->set('posts', $this->Post->query("SELECT * FROM posts "));
+					$posts = array_values($inclusive);
+					$this->set('posts', $posts);
+				}else {
+					$posts = array_values($exclusive);
+					$this->set('posts', $posts);
 				}
 			}
 		}else {
