@@ -9,22 +9,24 @@ class PostsController extends AppController
 	function busca_avancada()
 	{
 		$data=$this->request->data;
+
 		if(!empty($data['Tags'])){
+
+			$tags=$this->Post->Tag->findAllById($data['Tags']);
+			$posts=array();
+			for($i=0;$i<sizeof($data['Tags']);$i++){
+				$posts=array_merge($posts,$tags[$i]['Post']);
+			}
+			$inclusive= [];
+			$exclusive= [];
+			foreach ($posts as $v) {
+				if (!isset($inclusive[$v['id']])) {
+					$inclusive[$v['id']] = $v;
+				}else{
+					$exclusive[$v['id']] = $v;
+				}
+			}
 			if (empty($data['Search']['key'])) {
-				$tags=$this->Post->Tag->findAllById($data['Tags']);
-				$posts=array();
-				for($i=0;$i<sizeof($data['Tags']);$i++){
-					$posts=array_merge($posts,$tags[$i]['Post']);
-				}
-				$inclusive= [];
-				$exclusive= [];
-				foreach ($posts as $v) {
-					if (!isset($inclusive[$v['id']])) {
-						$inclusive[$v['id']] = $v;
-					}else{
-						$exclusive[$v['id']] = $v;
-					}
-				}
 				if($data['SearchType']==1){
 					$posts = array_values($inclusive);
 					$this->set('posts', $posts);
@@ -32,13 +34,43 @@ class PostsController extends AppController
 					$posts = array_values($exclusive);
 					$this->set('posts', $posts);
 				}
+			}else{
+				if($data['SearchType']==1){
+					$posts = array_values($inclusive);
+					$key = $data['Search']['key'];
+					$search=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+					$result=[];
+					$c=0;
+					foreach($search as $p){
+						if($p[0]['id']==$posts[$c]['id']){
+							$result=$p;
+						}
+						$c++;
+					}
+					$this->set('posts', $result);
+				}else {
+					$posts = array_values($exclusive);
+					$key = $data['Search']['key'];
+					$search=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+					$result=[];
+					$c=0;
+					foreach($search as $p){
+						if($p[0]['id']==$posts[$c]['id']){
+							$result=$p;
+						}
+						$c++;
+					}
+					$this->set('posts', $result);
+				}
 			}
 		}else {
 			if (empty($data['Search']['key'])) {
-				$this->set('posts', $this->Post->query("SELECT * FROM posts "));
+				$search=$this->Post->query("SELECT * FROM posts ");
+				$this->set('posts', array_column($search,0));
 			} else {
 				$key = $data['Search']['key'];
-				$this->set('posts', $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'"));
+				$search=$this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+				$this->set('posts', array_column($search,0));
 			}
 		}
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
