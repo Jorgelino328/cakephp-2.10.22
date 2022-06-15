@@ -1,19 +1,18 @@
 <!-- File: /app/View/Posts/index.ctp -->
 <div class="jumbotron">
 				<?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
-				<div class="col-lg-12">
 					<div class="input-group">
 						<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Buscar...')); ?>
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 						</span>
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default dropdown-toggle date" data-toggle="dropdown" role="button" aria-haspopup="true"  aria-expanded="false"   id="datepicker">
-								<span class="glyphicon glyphicon-calendar"></span><span class="caret"></span>
-							</button>
-						</span>
+
+					<div class="input-group input-daterange" id="datepicker">
+							<input type="text" class="form-control" value="2012-04-05">
+							<div class="input-group-addon">até</div>
+							<input type="text" class="form-control" value="2012-04-19">
+						</div>
 					</div>
-				</div>
 			<ul class="ks-cboxtags">
 				<input type="hidden" name="data[Tags]"/>
 				<?php foreach($tags as $tag){?>
