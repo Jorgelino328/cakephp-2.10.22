@@ -1,1 +1,3 @@
-<div id="<?php echo $key; ?>Message" class="<?php echo !empty($params['class']) ? $params['class'] : 'message'; ?>"><?php echo $message; ?></div>
+<div id="flash-<?php echo h($key) ?>" class="alert alert-warning" role="alert">
+	<?php echo h($message); ?>
+</div>

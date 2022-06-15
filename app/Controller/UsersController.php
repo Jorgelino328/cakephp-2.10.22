@@ -38,7 +38,7 @@ class UsersController extends AppController
 	{
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid user'));
+			throw new NotFoundException(__('Usuário Inválido!'));
 		}
 		$this->set('user', $this->User->findById($id));
 	}
@@ -61,7 +61,7 @@ class UsersController extends AppController
 	{
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Usuário Inválido'));
+			throw new NotFoundException(__('Usuário Inválido!'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {

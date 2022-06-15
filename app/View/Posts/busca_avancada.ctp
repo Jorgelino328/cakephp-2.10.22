@@ -1,4 +1,5 @@
 <!-- File: /app/View/Posts/index.ctp -->
+<?php echo $this->Flash->render('flash') ?>
 <div class="jumbotron">
 	<?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 	<div class="form-group form-inline col-md-12">

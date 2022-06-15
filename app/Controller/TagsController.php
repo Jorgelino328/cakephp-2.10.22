@@ -17,14 +17,6 @@ class TagsController extends AppController
 		}
 	}
 
-	public function isAuthorized($user)
-	{
-		if ($this->request->action === 'add') {
-			return true;
-		}
-		return parent::isAuthorized($user);
-	}
-
 	public function add()
 	{
 		if ($this->request->is('post')) {

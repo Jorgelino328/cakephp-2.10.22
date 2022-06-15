@@ -1,4 +1,5 @@
 <!-- File: /app/View/Posts/my_posts.ctp -->
+<?php echo $this->Flash->render('flash') ?>
 <div class="jumbotron">
 	<h1>Meus Posts <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Post", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></h1>
 	<div class="panel panel-default">
@@ -44,7 +45,7 @@
 					<tr>
 						<td colspan="12" class="hiddenRow">
 							<div class="accordian-body collapse" id="post<?php echo $post['id']?>">
-								<h4 ><?php echo $post['body']?></h4>
+								<p><?php echo $post['body']?></p>
 							</div>
 						</td>
 					</tr>

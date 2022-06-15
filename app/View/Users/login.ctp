@@ -1,3 +1,4 @@
+<?php echo $this->Flash->render('flash') ?>
 <div class="container-fluid">
 	<?php echo $this->Flash->render('auth'); ?>
 	<?php echo $this->Form->create('User'); ?>

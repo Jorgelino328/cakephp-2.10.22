@@ -1,4 +1,5 @@
 <!-- File: /app/View/Posts/edit.ctp -->
+<?php echo $this->Flash->render('flash') ?>
 <div class="container-fluid">
 <h1>Edit Post</h1>
 		<?php echo $this->Form->create('Post', array('action' => 'edit'));?>

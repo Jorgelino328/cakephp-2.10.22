@@ -1,5 +1,5 @@
 <!-- File: /app/View/Tags/add.ctp -->
-
+<?php echo $this->Flash->render('flash') ?>
 <div class="container-fluid">
 <h1>Add Tag</h1>
 	<?php echo $this->Form->create('Tag');?>

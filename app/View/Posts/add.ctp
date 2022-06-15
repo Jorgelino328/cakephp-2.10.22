@@ -1,5 +1,5 @@
 <!-- File: /app/View/Posts/add.ctp -->
-
+<?php echo $this->Flash->render('flash') ?>
 <div class="container-fluid">
 <h1>Add Post</h1>
 <?php

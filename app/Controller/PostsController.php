@@ -8,6 +8,7 @@ class PostsController extends AppController
 	public $name = 'Posts';
 	function busca_avancada($id=null)
 	{
+		$user_id=$this->Auth->User('id');
 		if($id){
 			$tag=$this->Post->Tag->findAllById($id);
 			$posts=$tag[0]['Post'];
@@ -20,8 +21,17 @@ class PostsController extends AppController
 			} else if (!empty($data['Tags'])) {
 				$tags = $this->Post->Tag->findAllById($data['Tags']);
 				$posts = array();
-				for ($i = 0; $i < sizeof($data['Tags']); $i++) {
-					$posts = array_merge($posts, $tags[$i]['Post']);
+				if(!empty($data['myposts'])) {
+					/*$myposts = $this->Post->query("SELECT * FROM posts WHERE user_id = $user_id");
+
+					foreach ($myposts as $mp) {
+						echo json_encode($mp);
+						if($mposts[])
+					}*/
+				}else{
+					for ($i = 0; $i < sizeof($data['Tags']); $i++) {
+						$posts = array_merge($posts, $tags[$i]['Post']);
+					}
 				}
 				$inclusive = [];
 				$exclusive = [];
@@ -89,9 +99,17 @@ class PostsController extends AppController
 				if (empty($data['Search']['key'])) {
 					$search = $this->Post->query("SELECT * FROM posts ");
 					$result = [];
-					foreach ($search as $s) {
-						if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
-							array_push($result, $s);
+					if(!empty($data['myposts'])) {
+						/*foreach ($search as $s) {
+							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after'] && $s[0]['user_id']==$user_id) {
+								array_push($result, $s);
+							}
+						}*/
+					}else{
+						foreach ($search as $s) {
+							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
+								array_push($result, $s);
+							}
 						}
 					}
 					$this->set('posts', array_column($result, 0));
@@ -99,12 +117,19 @@ class PostsController extends AppController
 					$key = $data['Search']['key'];
 					$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
 					$result = [];
-					foreach ($search as $s) {
-						if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
-							array_push($result, $s);
+					if(!empty($data['myposts'])) {
+					/*	foreach ($search as $s) {
+							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after'] && $s[0]['user_id']==$user_id) {
+								array_push($result, $s);
+							}
+						}*/
+					}else{
+						foreach ($search as $s) {
+							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
+								array_push($result, $s);
+							}
 						}
 					}
-
 					$this->set('posts', array_column($result, 0));
 				}
 			}
