@@ -1,5 +1,24 @@
 <!-- File: /app/View/Posts/index.ctp -->
-<?php echo $this->Flash->render('flash') ?>
+<?php echo $this->Flash->render('flash') ;
+$mine=$date1=$date2=false;
+$type=1;
+if ($this->Session->data){
+	if (!empty($this->Session->data['myposts'])) {
+		$mine = $this->Session->data['myposts'];
+	}
+	if ($this->Session->data['SearchType']==2) {
+		$type =2;
+	}
+	$date1=$this->Session->data['before'];;
+	$date2=$this->Session->data['after'];
+}else{?>
+	<script>
+		var date = new Date();
+		date.setFullYear(date.getFullYear() - 10);
+		$('.date1').datepicker("setDate",date);
+		$('.date2').datepicker("setDate",'now');
+	</script>
+<?php }?>
 <div class="jumbotron">
 	<?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 	<div class="form-group form-inline col-md-12">
@@ -10,21 +29,21 @@
 		</span>
 		</div>
 		<div class="input-group col-md-3">
-			<input type="text" class="form-control date1" name="before">
+			<input type="text" class="form-control datepicker date1" name="before" <?php if($date1){?>value="<?php echo $date1?>"<?} ?>>
 			<div class="input-group-addon">até</div>
-			<input type="text" class="form-control date2" name="after">
+			<input type="text" class="form-control datepicker date2" name="after" <?php if($date2){?>value="<?php echo $date2?>"<?} ?>>
 		</div>
 	</div>
 			<ul class="ks-cboxtags">
 				<input type="hidden" name="data[Tags]"/>
 				<?php foreach($tags as $tag){?>
-					<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Tags][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
+					<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Tags][]" value="<?php echo $tag[0]['id']?>" <?php if(in_array($tag[0]['id'],$this->Session->data['Tags'])){?>checked <?php } ?>/><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
 				<?php }?>
 
 				<div class="input-group">
-					<label class="radio-inline"><input type="radio" name="SearchType" value="1" checked>Pesquisa Inclusiva</label>
-					<label class="radio-inline"><input type="radio" name="SearchType" value="2">Pesquisa Exclusiva</label>
-					<?php if ($this->Session->read('Auth.User')) {	?><span style="position: relative; left: 10px;" ><label class="checkbox-inline"><input type="checkbox" name="myposts" value="1">Somente meus posts </label></span><?php } ?>
+					<label class="radio-inline"><input type="radio" name="SearchType" value="1" <?php if($type==1){?>checked<?php }?>>Pesquisa Inclusiva</label>
+					<label class="radio-inline"><input type="radio" name="SearchType" value="2" <?php if($type==2){?>checked<?php }?>>Pesquisa Exclusiva</label>
+					<?php if ($this->Session->read('Auth.User')) {	?><span style="position: relative; left: 10px;" ><label class="checkbox-inline"><input type="checkbox" name="myposts" value="1" <?php if($mine){?>checked<?php }?>>Somente meus posts </label></span><?php } ?>
 				</div>
 				<li style="position:relative;margin-top:8px;">
 					<?php echo $this->Form->end();?>
@@ -64,12 +83,10 @@
 
 									<?php echo $this->Form->postLink(
 											$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
-											array('action' => 'delete', $post
-											['id']), array( 'class'=>'btn btn-danger btn-lg', 'role'=>'button','escape' => false),
+											array('action' => 'delete', $post['id']), array( 'class'=>'btn btn-danger btn-lg', 'role'=>'button','escape' => false),
 											array('confirm' => 'Are you sure?')
 									) ?>
-									<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post
-									['id']), array( 'class'=>'btn btn-warning btn-lg', 'role'=>'button','escape' => false));
+									<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post['id']), array( 'class'=>'btn btn-warning btn-lg', 'role'=>'button','escape' => false));
 								} ?></div></td>
 						<td><?php echo date("d-m-Y", strtotime($post['created'])); ?></td>
 					</tr>
@@ -93,8 +110,4 @@
 		autoclose: true,
 		language:'pt-BR',
 	})
-	var date = new Date();
-	date.setFullYear(date.getFullYear() - 10);
-	$('.date1').datepicker("setDate",date);
-	$('.date2').datepicker("setDate",'now');
 </script>

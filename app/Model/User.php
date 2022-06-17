@@ -38,10 +38,15 @@ class User extends AppModel
 	public function beforeSave($options = array())
 	{
 		if (isset($this->data[$this->alias]['password'])) {
-			$passwordHasher = new BlowfishPasswordHasher();
-			$this->data[$this->alias]['password'] = $passwordHasher->hash(
-				$this->data[$this->alias]['password']
-			);
+			if(strlen($this->data[$this->alias]['password'])<8){
+				$this->error = __('A senha deve ter pelo menos 8 caracteres!');
+				return false;
+			}else {
+				$passwordHasher = new BlowfishPasswordHasher();
+				$this->data[$this->alias]['password'] = $passwordHasher->hash(
+					$this->data[$this->alias]['password']
+				);
+			}
 		}
 		return true;
 	}

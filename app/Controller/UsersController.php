@@ -47,9 +47,13 @@ class UsersController extends AppController
 	{
 		if ($this->request->is('post')) {
 			$this->User->create();
+
 			if ($this->User->save($this->request->data)) {
 					$this->Flash->success(__('Usuário salvo com sucesso!'));
 				return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
+			}
+			if(!empty($this->User->error)) {
+				$this->Flash->default($this->User->error);
 			}
 			$this->Flash->error(
 				__('O usuário não pôde ser salvo, por favor tente novamente!')

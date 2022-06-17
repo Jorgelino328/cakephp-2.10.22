@@ -59,6 +59,15 @@ class AppController extends Controller
 
 	public function beforeRender()
 	{
+
+		/*if (!$this->request->is('post')) {
+			// restore autosave data for the current url if no form is posted
+			$this->request->data = $this->AutosaveComponent->restore($this->request->here);
+		} else {
+			// form is posted; flush the autosave data for the current URL
+			$this->AutosaveComponent->flush($this->request->here);
+		}*/
+
 		$this->loadModel('Tag');
         $this->set('tags', $this->Tag->query("SELECT * FROM tags"));
 	}

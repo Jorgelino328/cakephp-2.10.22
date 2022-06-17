@@ -2,7 +2,7 @@
 <?php echo $this->Flash->render('flash') ?>
 <div class="container-fluid">
 	<?php echo $this->Form->create('User'); ?>
-		<legend><?php echo __('Add User'); ?></legend>
+		<legend><?php echo __('Adicionar Usuário'); ?></legend>
 		<div class="form-group">
 			<label>Usuário : </label><?php echo $this->Form->input('username', array('label' => false, 'class'=>'form-control'));?>
 		</div>
