@@ -13,8 +13,11 @@
 	<label>Tags:</label>
 		<ul class="ks-cboxtags">
 			<input type="hidden" name="data[Post][tags]"/>
-			<?php foreach($tags as $tag){?>
-				<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" value="<?php echo $tag[0]['id']?>" /><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
+
+			<?php
+			foreach($tags as $tag){?>
+
+				<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" value="<?php echo $tag[0]['id']?>" <?php foreach($this->Session->data['Tag'] as $mytag){ if($mytag['PostsTag']['tag_id'] == $tag[0]['id'] ){?>checked<?php } }?>/><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
 			<?php }?>
 		</ul>
 	</div>
