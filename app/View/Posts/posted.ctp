@@ -1,4 +1,4 @@
-<!-- File: /app/View/Posts/my_posts.ctp -->
+<!-- File: /app/View/Posts/index.ctp -->
 <?php echo $this->Flash->render('flash') ?>
 <div class="jumbotron">
 	<h1>Meus Posts <?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-plus')) . " Criar Post", array('action' => 'add'), array( 'class'=>'btn btn-primary btn-lg', 'role'=>'button','escape' => false)); ?></h1>
@@ -25,7 +25,7 @@
 									<ul class="ks-cboxtags" style="position: relative;display:inline-block;">
 										<?php foreach($tags as $tag) {
 											if($tag[0]['id']==$posts_tag[0]['tag_id']){?>
-												<li	><a href="/posts/my_posts/<?php echo $tag[0]['id']?>"><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" checked/><label class="checkbox-inline"><?php echo $tag[0]['nome'] ?></label></a></li>
+												<li	><a href="/posts/posted/<?php echo $tag[0]['id']?>"><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Post][tags][]" checked/><label class="checkbox-inline"><?php echo $tag[0]['nome'] ?></label></a></li>
 											<?php }
 										}?>
 									</ul>

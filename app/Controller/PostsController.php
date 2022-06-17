@@ -16,21 +16,22 @@ class PostsController extends AppController
 		}else {
 			$data = $this->request->data;
 			if (empty($data)) {
-				$posts = $this->Post->query("SELECT * FROM posts ");
-				$this->set('posts', array_column($posts, 0));
+				$posts = [];
+				$this->set('posts', $posts);
 			} else if (!empty($data['Tags'])) {
 				$tags = $this->Post->Tag->findAllById($data['Tags']);
 				$posts = array();
 				if(!empty($data['myposts'])) {
-					/*$myposts = $this->Post->query("SELECT * FROM posts WHERE user_id = $user_id");
-
-					foreach ($myposts as $mp) {
-						echo json_encode($mp);
-						if($mposts[])
-					}*/
-				}else{
-					for ($i = 0; $i < sizeof($data['Tags']); $i++) {
-						$posts = array_merge($posts, $tags[$i]['Post']);
+					foreach ($tags as $tag) {
+						foreach ($tag['Post'] as $tagged_post) {
+							if ($tagged_post['user_id'] == $user_id) {
+								$posts[] = $tagged_post;
+							}
+						}
+					}
+				}else {
+					foreach ($tags as $tag) {
+						$posts = array_merge($posts, $tag['Post']);
 					}
 				}
 				$inclusive = [];
@@ -42,96 +43,49 @@ class PostsController extends AppController
 						$exclusive[$v['id']] = $v;
 					}
 				}
-				if (empty($data['Search']['key'])) {
-					if ($data['SearchType'] == 1) {
-						$posts = array_values($inclusive);
-						$result = [];
-						$c = 0;
-						foreach ($posts as $p) {
-							if ($data['before'] <= date("d-m-Y", strtotime($p[0]['created'])) && date("d-m-Y", strtotime($p[0]['created'])) <= $data['after']) {
-								array_push($result, $p);
-							}
-							$c++;
-						}
-						$this->set('posts', $result);
-					} else {
-						$posts = array_values($exclusive);
-						$result = [];
-						$c = 0;
-						foreach ($posts as $p) {
-							if ($data['before'] <= date("d-m-Y", strtotime($p[0]['created'])) && date("d-m-Y", strtotime($p[0]['created'])) <= $data['after']) {
-								array_push($result, $p);
-							}
-							$c++;
-						}
-						$this->set('posts', $result);
-					}
+				if ($data['SearchType'] == 1) {
+					$posts = array_values($inclusive);
+
 				} else {
-					if ($data['SearchType'] == 1) {
-						$posts = array_values($inclusive);
-						$key = $data['Search']['key'];
-						$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
-						$result = [];
-						$c = 0;
-						foreach ($search as $s) {
-							if ($s[0]['id'] == $posts[$c]['id'] && $data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
-								array_push($result, $s);
-							}
-							$c++;
+					$posts = array_values($exclusive);
+				}
+				if (empty($data['Search']['key'])) {
+					$result = [];
+					$c = 0;
+					foreach ($posts as $p) {
+						if (date("Y-m-d", strtotime($data['before'])) <= date("Y-m-d", strtotime($p['created'])) && date("Y-m-d", strtotime($p['created'])) <= date("Y-m-d", strtotime($data['after']))) {
+							$result[] = $p;
 						}
-						$this->set('posts', array_column($result, 0));
-					} else {
-						$posts = array_values($exclusive);
-						$key = $data['Search']['key'];
-						$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
-						$result = [];
-						$c = 0;
-						foreach ($search as $s) {
-							if ($s[0]['id'] == $posts[$c]['id'] && $data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
-								array_push($result, $s);
-							}
-							$c++;
-						}
-						$this->set('posts', array_column($result, 0));
+						$c++;
 					}
+					$this->set('posts', $result);
+				} else {
+					$key = $data['Search']['key'];
+					$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
+					$result = [];
+					$c = 0;
+					foreach ($search as $s) {
+						if(empty($posts[$c])){
+							break;
+						}else if ($s[0]['id']==$posts[$c]['id'] && date("Y-m-d", strtotime($data['before'])) <= date("Y-m-d", strtotime($s[0]['created'])) && date("Y-m-d", strtotime($s[0]['created'])) <= date("Y-m-d", strtotime($data['after']))) {
+							$result[] = $s;
+						}
+						$c++;
+					}
+					$this->set('posts', array_column($result, 0));
 				}
 			} else {
 				if (empty($data['Search']['key'])) {
 					$search = $this->Post->query("SELECT * FROM posts ");
 					$result = [];
-					if(!empty($data['myposts'])) {
-						/*foreach ($search as $s) {
-							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after'] && $s[0]['user_id']==$user_id) {
-								array_push($result, $s);
-							}
-						}*/
-					}else{
-						foreach ($search as $s) {
-							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
-								array_push($result, $s);
-							}
-						}
-					}
-					$this->set('posts', array_column($result, 0));
+					$result = $this->getPosts($data, $search, $user_id, $result);
 				} else {
 					$key = $data['Search']['key'];
 					$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
 					$result = [];
-					if(!empty($data['myposts'])) {
-					/*	foreach ($search as $s) {
-							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after'] && $s[0]['user_id']==$user_id) {
-								array_push($result, $s);
-							}
-						}*/
-					}else{
-						foreach ($search as $s) {
-							if ($data['before'] <= date("d-m-Y", strtotime($s[0]['created'])) && date("d-m-Y", strtotime($s[0]['created'])) <= $data['after']) {
-								array_push($result, $s);
-							}
-						}
-					}
-					$this->set('posts', array_column($result, 0));
+					$result = $this->getPosts($data, $search, $user_id, $result);
 				}
+				$this->set('posts', array_column($result, 0));
 			}
 		}
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
@@ -159,7 +113,7 @@ class PostsController extends AppController
 		$this->set('posts_tags', $this->Post->query("SELECT * FROM posts_tags"));
 		$this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
 	}
-	function my_posts($id=null)
+	function posted($id=null)
 	{
 		$user_id=$this->Auth->User('id');
 		if($id){
@@ -260,5 +214,32 @@ class PostsController extends AppController
 			$this->Flash->success('O post com o id: ' . $id . ' foi deletado.');
 			$this->redirect(array('action' => 'index'));
 		}
+	}
+
+	/**
+	 * @param array $data
+	 * @param $search
+	 * @param $user_id
+	 * @param array $result
+	 * @return array
+	 */
+	public function getPosts(array $data, $search, $user_id, array $result): array
+	{
+
+		if (!empty($data['myposts'])) {
+			foreach ($search as $s) {
+				if ($s[0]['user_id'] == $user_id) {
+					$result[] = $s;
+				}
+			}
+		} else {
+			foreach ($search as $s) {
+
+				if (date("Y-m-d", strtotime($data['before'])) <= date("Y-m-d", strtotime($s[0]['created'])) && date("Y-m-d", strtotime($s[0]['created'])) <= date("Y-m-d", strtotime($data['after']))) {
+					$result[] = $s;
+				}
+			}
+		}
+		return $result;
 	}
 }

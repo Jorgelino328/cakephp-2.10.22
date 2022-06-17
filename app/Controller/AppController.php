@@ -54,7 +54,7 @@ class AppController extends Controller
 
 	public function beforeFilter()
 	{
-		$this->Auth->allow('index', 'view');
+		$this->Auth->allow('index', 'view','busca_avancada');
 	}
 
 	public function beforeRender()

@@ -10,9 +10,9 @@
 		</span>
 		</div>
 		<div class="input-group col-md-3">
-			<input type="text" class="form-control datepicker" name="before">
+			<input type="text" class="form-control date1" name="before">
 			<div class="input-group-addon">até</div>
-			<input type="text" class="form-control datepicker" name="after">
+			<input type="text" class="form-control date2" name="after">
 		</div>
 	</div>
 			<ul class="ks-cboxtags">
@@ -24,7 +24,7 @@
 				<div class="input-group">
 					<label class="radio-inline"><input type="radio" name="SearchType" value="1" checked>Pesquisa Inclusiva</label>
 					<label class="radio-inline"><input type="radio" name="SearchType" value="2">Pesquisa Exclusiva</label>
-					<span style="position: relative; left: 10px;" ><label class="checkbox-inline"><input type="checkbox" name="myposts" value="1">Somente meus posts </label></span>
+					<?php if ($this->Session->read('Auth.User')) {	?><span style="position: relative; left: 10px;" ><label class="checkbox-inline"><input type="checkbox" name="myposts" value="1">Somente meus posts </label></span><?php } ?>
 				</div>
 				<li style="position:relative;margin-top:8px;">
 					<?php echo $this->Form->end();?>
@@ -38,7 +38,7 @@
 				<tr>
 					<th>Título</th>
 					<th>Tags</th>
-					<th>Opções</th>
+					<?php if ($this->Session->read('Auth.User')) {?><th>Opções</th><?php } ?>
 					<th>Data de Criação</th>
 				</tr>
 
@@ -92,5 +92,9 @@
 		format: 'dd-mm-yyyy',
 		autoclose: true,
 		language:'pt-BR',
-	}).datepicker("setDate",'now');;
+	})
+	var date = new Date();
+	date.setFullYear(date.getFullYear() - 10);
+	$('.date1').datepicker("setDate",date);
+	$('.date2').datepicker("setDate",'now');
 </script>

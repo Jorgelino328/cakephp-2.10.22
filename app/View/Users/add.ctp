@@ -15,7 +15,7 @@
 			<select name="data[User][role]" id="UserRole" class="form-control">
 				<option value="">[ Escolher Cargo ]</option>
 				<option value="admin">Admin</option>
-				<option value="author">Author</option>
+				<option value="author">Autor</option>
 			</select>
 		</div>
 
