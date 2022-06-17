@@ -1,7 +1,7 @@
 <div class="container">
 	<section style="height:80px;"></section>
 	<div class="row" style="text-align:center;">
-		<h2>Bootstrap Dark Footer UI</h2>
+		<h2>Beyond Tecnologia</h2>
 	</div>
 	<!----------- Footer ------------>
 	<footer class="footer-bs">
@@ -15,19 +15,19 @@
 				<h4>Menu —</h4>
 				<div class="col-md-6">
 					<ul class="pages">
-						<li><a href="#">Travel</a></li>
-						<li><a href="#">Nature</a></li>
-						<li><a href="#">Explores</a></li>
-						<li><a href="#">Science</a></li>
-						<li><a href="#">Advice</a></li>
+						<li><a href="#">Viagens</a></li>
+						<li><a href="#">Natureza</a></li>
+						<li><a href="#">Explorar</a></li>
+						<li><a href="#">Ciência</a></li>
+						<li><a href="#">Conselhos</a></li>
 					</ul>
 				</div>
 				<div class="col-md-6">
 					<ul class="list">
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Contacts</a></li>
-						<li><a href="#">Terms & Condition</a></li>
-						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Sobre Nós</a></li>
+						<li><a href="#">Contatos</a></li>
+						<li><a href="#">Termos & Condições</a></li>
+						<li><a href="#">Política de Privacidade</a></li>
 					</ul>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 			</div>
 			<div class="col-md-3 footer-ns animated fadeInRight">
 				<h4>Newsletter</h4>
-				<p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+				<p>Beibe beibe do beibe do biruleibe leibe</p>
 				<p>
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search for...">
@@ -54,6 +54,6 @@
 			</div>
 		</div>
 	</footer>
-	<section style="text-align:center; margin:10px auto;"><p>Designed by <a href="http://enfoplus.net">Prince J. Sargbah</a></p></section>
+	<section style="text-align:center; margin:10px auto;"><p>Designed by <a href="http://enfoplus.net">Jorge W. Câmara Sales</a></p></section>
 
 </div>
