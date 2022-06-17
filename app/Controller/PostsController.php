@@ -131,24 +131,10 @@ class PostsController extends AppController
         $this->set('tags', $this->Post->Tag->query("SELECT * FROM tags"));
 	}
 
-	public function view($id = null)
-	{
-
-		if (!$id) {
-			throw new NotFoundException(__('Post inválido'));
-		}
-
-		$post = $this->Post->findById($id);
-		if (!$post) {
-			throw new NotFoundException(__('Post inválido'));
-		}
-		$this->set('post', $post);
-	}
-
 	public function isAuthorized($user)
 	{
 		// All registered users can add posts
-		if ($this->request->action === 'add') {
+		if ($this->request->action === 'add' || $this->request->action === 'posted') {
 			return true;
 		}
 
@@ -205,10 +191,10 @@ class PostsController extends AppController
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
+		$post = $this->Post->findById($id);
 		if ($this->Post->delete($id)) {
-
 			$this->Post->query("DELETE FROM posts_tags WHERE post_id=$id");
-			$this->Flash->success('O post com o id: ' . $id . ' foi deletado.');
+			$this->Flash->success('O post ' . $post['Post']['title']  . ' foi deletado.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}

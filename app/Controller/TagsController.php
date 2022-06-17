@@ -33,9 +33,10 @@ class TagsController extends AppController
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
+		$tag = $this->Tag->findById($id);
 		if ($this->Tag->delete($id)) {
 			$this->Tag->query("DELETE FROM posts_tags WHERE tag_id=$id");
-			$this->Flash->success('A tag com o id: ' . $id . ' foi deletada.');
+			$this->Flash->success('A tag ' . $tag['Tag']['nome'] . ' foi deletada.');
 			$this->redirect(array('action' => 'index'));
 		}
 	}

@@ -17,9 +17,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'index'))?></li>
-				<li><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'posted'))?></li>
-				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
+				<li class="<?= ($this->params['action'] == 'index' && $this->params['controller'] == 'posts') ? 'active':''; ?>"><?php echo $this->Html->link('Home', array('controller' => 'posts', 'action' => 'index'))?></li>
+				<li class="<?= ($this->params['action'] == 'posted') ? 'active':''; ?>"><?php echo $this->Html->link('Meus Posts', array('controller' => 'posts', 'action' => 'posted'))?></li>
+				<li class="<?= ($this->params['action'] == 'index' && $this->params['controller'] == 'tags') ? 'active':''; ?>"><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index'))?></li>
 				<li style="position:relative; left:10px; margin-top:8px; width: 500px"><?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 				<?php echo $this->Form->input('key', array('label' => false,'type'=>'text','class'=>'form-control', 'placeholder'=>'Buscar...'), array('div' => false)); ?></li>
 				<li style="position:relative;margin-top:8px;"><button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>

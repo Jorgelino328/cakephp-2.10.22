@@ -10,7 +10,7 @@
 								<tr>
 									<th>Título</th>
 									<th>Tags</th>
-									<?php if ($this->Session->read('Auth.User')) {?><th>Opções</th><?php }?>
+									<th><?php if ($this->Session->read('Auth.User')) {?>Opções<?php }?></th>
 									<th>Data de Criação</th>
 								</tr>
 
@@ -31,16 +31,15 @@
 												</ul>
 											<?php }
 										}?></td>
-									<?php if ($post['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
-									<td style="text-align: center; vertical-align: middle;"	><div class="btn-toolbar" role="toolbar" >
 
+									<td style="text-align: center; vertical-align: middle;"	><div class="btn-toolbar" role="toolbar" >
+											<?php if ($post['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
 											<?php echo $this->Form->postLink(
 													$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
-													array('action' => 'delete', $post['id']), array( 'class'=>'btn btn-danger btn-lg', 'role'=>'button','escape' => false),
-													array('confirm' => 'Are you sure?')
+													array('action' => 'delete', $post['id']), array( 'class'=>'btn btn-danger btn-lg', 'role'=>'button','escape' => false,'confirm' => 'Are you sure?')
 											) ?>
 											<?php echo $this->Html->link($this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-wrench')), array('action' => 'edit', $post['id']), array( 'class'=>'btn btn-warning btn-lg', 'role'=>'button','escape' => false));
-											?></div></td><?php } ?>
+											?></div><?php } ?></td>
 									<td><?php echo date("d/m/Y", strtotime($post['created'])); ?></td>
 								</tr>
 								<tr>
