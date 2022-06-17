@@ -1,24 +1,18 @@
 <!-- File: /app/View/Posts/index.ctp -->
 <?php echo $this->Flash->render('flash') ;
 $mine=$date1=$date2=false;
-$type=1;
+$type="1";
 if ($this->Session->data){
 	if (!empty($this->Session->data['myposts'])) {
 		$mine = $this->Session->data['myposts'];
 	}
-	if ($this->Session->data['SearchType']==2) {
-		$type =2;
+	if ($this->Session->data['SearchType']=="2") {
+		$type ="2";
 	}
 	$date1=$this->Session->data['before'];;
 	$date2=$this->Session->data['after'];
-}else{?>
-	<script>
-		var date = new Date();
-		date.setFullYear(date.getFullYear() - 10);
-		$('.date1').datepicker("setDate",date);
-		$('.date2').datepicker("setDate",'now');
-	</script>
-<?php }?>
+}?>
+
 <div class="jumbotron">
 	<?php echo $this->Form->create('Search', array('label' => false,'controller' => 'posts', 'url' => $this->params['action'], 'method' => 'get')); ?>
 	<div class="form-group form-inline col-md-12">
@@ -37,7 +31,7 @@ if ($this->Session->data){
 			<ul class="ks-cboxtags">
 				<input type="hidden" name="data[Tags]"/>
 				<?php foreach($tags as $tag){?>
-					<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Tags][]" value="<?php echo $tag[0]['id']?>" <?php if(in_array($tag[0]['id'],$this->Session->data['Tags'])){?>checked <?php } ?>/><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
+					<li><input id="<?php echo $tag[0]['id']?>"  type="checkbox" name="data[Tags][]" value="<?php echo $tag[0]['id']?>" <?php if($this->Session->data && $this->Session->data['Tags']){ if(in_array($tag[0]['id'],$this->Session->data['Tags'])){?>checked <?php }} ?>/><label for="<?php echo $tag[0]['id']?>"><?php echo $tag[0]['nome'] ?></label></li>
 				<?php }?>
 
 				<div class="input-group">
@@ -49,7 +43,6 @@ if ($this->Session->data){
 					<?php echo $this->Form->end();?>
 				</li>
 			</ul>
-
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<table class="table">
@@ -78,8 +71,7 @@ if ($this->Session->data){
 									</ul>
 								<?php }
 							}?></td>
-						<td style="text-align: center; vertical-align: middle;"	><div class="btn-toolbar" role="toolbar" ><?php if ($post
-										['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
+						<td style="text-align: center; vertical-align: middle;"	><div class="btn-toolbar" role="toolbar" ><?php if ($post['user_id'] == $user['id']  || $user['role'] === 'admin') { ?>
 
 									<?php echo $this->Form->postLink(
 											$this->Html->tag('span', '', array('class' => 'glyphicon glyphicon-trash')),
@@ -110,4 +102,8 @@ if ($this->Session->data){
 		autoclose: true,
 		language:'pt-BR',
 	})
+	var date = new Date();
+	date.setFullYear(date.getFullYear() - 10);
+	$('.date1').datepicker("setDate",date);
+	$('.date2').datepicker("setDate",'now');
 </script>

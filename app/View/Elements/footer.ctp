@@ -54,6 +54,6 @@
 			</div>
 		</div>
 	</footer>
-	<section style="text-align:center; margin:10px auto;"><p>Designed by <a href="http://enfoplus.net">Jorge W. Câmara Sales</a></p></section>
+	<section style="text-align:center; margin:10px auto;"><p>Desenvolvido por <a href="http://enfoplus.net">Jorge W. Câmara Sales</a></p></section>
 
 </div>

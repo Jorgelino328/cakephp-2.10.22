@@ -63,28 +63,25 @@ class PostsController extends AppController
 					$key = $data['Search']['key'];
 					$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
 					$result = [];
-					$c = 0;
 					foreach ($search as $s) {
-						if(empty($posts[$c])){
-							break;
-						}else if ($s[0]['id']==$posts[$c]['id'] && date("Y-m-d", strtotime($data['before'])) <= date("Y-m-d", strtotime($s[0]['created'])) && date("Y-m-d", strtotime($s[0]['created'])) <= date("Y-m-d", strtotime($data['after']))) {
-							$result[] = $s;
+						foreach ($posts as $p) {
+							if (!empty($p) && $s[0]['id'] == $p['id'] && date("Y-m-d", strtotime($data['before'])) <= date("Y-m-d", strtotime($s[0]['created'])) && date("Y-m-d", strtotime($s[0]['created'])) <= date("Y-m-d", strtotime($data['after']))) {
+								$result[] = $s;
+
+							}
 						}
-						$c++;
 					}
 					$this->set('posts', array_column($result, 0));
 				}
 			} else {
 				if (empty($data['Search']['key'])) {
 					$search = $this->Post->query("SELECT * FROM posts ");
-					$result = [];
-					$result = $this->getPosts($data, $search, $user_id, $result);
 				} else {
 					$key = $data['Search']['key'];
 					$search = $this->Post->query("SELECT * FROM posts WHERE title ILIKE '%$key%'");
-					$result = [];
-					$result = $this->getPosts($data, $search, $user_id, $result);
 				}
+				$result = [];
+				$result = $this->getPosts($data, $search, $user_id, $result);
 				$this->set('posts', array_column($result, 0));
 			}
 		}
