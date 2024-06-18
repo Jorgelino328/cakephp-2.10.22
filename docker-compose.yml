@@ -1,15 +1,14 @@
 version: "3.3"
 
 services:
-
   db:
     image: postgres
     restart: always
-    ports: 
+    ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: senhadb
-      POSTGRES_DB: "cake_blog"
+      POSTGRES_DB: "echo_db"
       POSTGRES_USER: "postgres"
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -21,11 +20,11 @@ services:
     restart: always
     volumes:
       - .:/var/www/html
+      - ./app/tmp:/var/www/html/app/tmp
     ports:
       - 8080:80
     depends_on:
       - db
-
 
 volumes:
   db-data:
