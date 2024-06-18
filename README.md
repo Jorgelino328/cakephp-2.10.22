@@ -1,48 +1,70 @@
-# CakePHP
+# Website CakePHP
 
-[![Latest Stable Version](https://poser.pugx.org/cakephp/cakephp/v/stable.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![License](https://poser.pugx.org/cakephp/cakephp/license.svg)](https://packagist.org/packages/cakephp/cakephp)
-[![Bake Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](https://travis-ci.org/cakephp/cakephp)
-[![Code consistency](https://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/grade.svg)](https://squizlabs.github.io/PHP_CodeSniffer/analysis/cakephp/cakephp/)
+Este é um projeto de website em CakePHP projetado para demonstrar a configuração e uso de uma aplicação CakePHP.
 
-CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.
-Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+## Começando
 
+Siga estes passos para configurar o website CakePHP:
 
-## Some Handy Links
+```bash
+git clone <url-do-repositório>
+cd cakephp-website
+```
 
-[CakePHP](https://cakephp.org) - The rapid development PHP framework
+### 2. Configurar Banco de Dados
 
-[CookBook](https://book.cakephp.org) - THE CakePHP user documentation; start learning here!
+Copie o arquivo `database.php.default` localizado em `app/Config/` para `database.php`:
 
-[API](https://api.cakephp.org) - A reference to CakePHP's classes
+```bash
+cp app/Config/database.php.default app/Config/database.php
+```
 
-[Plugins](https://plugins.cakephp.org) - A repository of extensions to the framework
+Edite o arquivo `database.php` e configure a conexão do banco de dados da seguinte maneira:
 
-[The Bakery](https://bakery.cakephp.org) - Tips, tutorials and articles
+```php
+public $default = array(
+    'datasource' => 'Database/Postgres',
+    'persistent' => false,
+    'host' => 'db',
+    'login' => 'postgres',
+    'password' => 'senhadb',
+    'database' => 'echo_db',
+    'prefix' => '',
+    'encoding' => 'utf8',
+);
+```
 
-[Community Center](https://community.cakephp.org) - A source for everything community related
+Substitua `'senhadb'` pela sua senha do PostgreSQL se for diferente.
 
-[Training](https://training.cakephp.org) - Join a live session and get skilled with the framework
+### 3. Construir e Executar Contêineres Docker
 
-[CakeFest](https://cakefest.org) - Don't miss our annual CakePHP conference
+Execute o seguinte comando para construir e iniciar os contêineres Docker:
 
-[Cake Software Foundation](https://cakefoundation.org) - Promoting development related to CakePHP
+```bash
+docker-compose up --build
+```
 
+### 4. Conectar ao Banco de Dados
 
-## Get Support!
+Conecte-se ao banco de dados PostgreSQL usando um terminal ou uma ferramenta de gerenciamento de banco de dados como DBeaver ou pgAdmin. Use os seguintes detalhes de conexão:
 
-[#cakephp](https://webchat.freenode.net/?channels=#cakephp) on irc.freenode.net - Come chat with us, we have cake
+- **Host**: db
+- **Usuário**: postgres
+- **Senha**: senhadb (ou sua senha do PostgreSQL)
+- **Banco de Dados**: echo_db
 
-[Google Group](https://groups.google.com/group/cake-php) - Community mailing list and forum
+### 5. Executar Schema
 
-[GitHub Issues](https://github.com/cakephp/cakephp/issues) - Got issues? Please tell us!
+Execute o schema localizado em `app/config/echo_db.sql` no seu banco de dados PostgreSQL. Você pode fazer isso via terminal ou usando uma ferramenta de gerenciamento de banco de dados.
 
-[Roadmaps](https://github.com/cakephp/cakephp/wiki#roadmaps) - Want to contribute? Get involved!
+## Uso
 
+Após a configuração estar completa, você pode acessar o website CakePHP navegando para `http://localhost` no seu navegador web.
 
-## Contributing
+## Contribuições
 
-[CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the CakePHP project
+Sinta-se à vontade para contribuir para este projeto enviando solicitações de pull ou relatando problemas.
 
-[CookBook "Contributing" Section (2.x)](https://book.cakephp.org/2.0/en/contributing.html) [(3.x)](https://book.cakephp.org/3.0/en/contributing.html) - Version-specific details about contributing to the project
+## Licença
+
+Este projeto é licenciado sob a [Licença MIT](LICENSE).

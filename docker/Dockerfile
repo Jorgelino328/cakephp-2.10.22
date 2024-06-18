@@ -9,38 +9,25 @@ RUN apt-get update -yqq \
 
 RUN apt-get update
 
-# Install Postgre PDO
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
-# Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
-# Add cake and composer command to system path
 ENV PATH="${PATH}:/var/www/html/lib/Cake/Console"
 ENV PATH="${PATH}:/var/www/html/app/Vendor/bin"
 
-# COPY apache site.conf file
 COPY ./docker/apache/site.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy the source code into /var/www/html/ inside the image
-COPY . .
+COPY . /var/www/html
 
-# Set default working directory
-WORKDIR /app
+WORKDIR /var/www/html
 
-# Create tmp directory and make it writable by the web server
-RUN mkdir -p \
-    tmp/cache/models \
-    tmp/cache/persistent \
-  && chown -R :www-data \
-    tmp \
-  && chmod -R 770 \
-    tmp
+RUN mkdir -p /var/www/html/app/tmp/cache/models /var/www/html/app/tmp/cache/persistent \
+  && chown -R www-data:www-data /var/www/html/app/tmp \
+  && chmod -R 775 /var/www/html/app/tmp
 
-# Enable Apache modules and restart
-RUN a2enmod rewrite \
-  && service apache2 restart
+RUN a2enmod rewrite
 
 EXPOSE 80
