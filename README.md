@@ -59,7 +59,7 @@ Execute o schema localizado em `app/config/echo_db.sql` no seu banco de dados Po
 
 ## Uso
 
-Após a configuração estar completa, você pode acessar o website CakePHP navegando para `http://localhost` no seu navegador web.
+Após a configuração estar completa, você pode acessar o website CakePHP navegando para `http://localhost:8080` no seu navegador web.
 
 ## Contribuições
 
